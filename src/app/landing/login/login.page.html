@@ -1,0 +1,36 @@
+<ion-content class="primary" padding>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title position="center">Login</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <form>
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password"></ion-input>
+        </ion-item>
+        <div class="ion-padding">
+          <ion-button expand="block" type="submit" class="ion-no-margin"
+            >Login</ion-button
+          >
+        </div>
+      </form>
+      <div>
+        <ion-note color="primary"
+          >New User?
+          <a
+            [routerLink]="['/landing/registration']"
+            routerLinkActive="router-link-active"
+          >
+            Register Here.
+          </a>
+        </ion-note>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
