@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="ion-padding">
   <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
@@ -20,7 +20,7 @@
       <ion-note
         color="danger"
         *ngIf="this.formSubmitted && checkControlHasError('firstName')"
-        padding
+        class="ion-padding"
         >Please enter valid first name
       </ion-note>
 
@@ -34,7 +34,7 @@
       <ion-note
         color="danger"
         *ngIf="this.formSubmitted && checkControlHasError('lastName')"
-        padding
+        class="ion-padding"
         >Please enter valid Last name
       </ion-note>
 
@@ -48,7 +48,7 @@
       <ion-note
         color="danger"
         *ngIf="this.formSubmitted && checkControlHasError('userName')"
-        padding
+        class="ion-padding"
         >Please enter valid user name
       </ion-note>
 
@@ -62,7 +62,7 @@
       <ion-note
         color="danger"
         *ngIf="this.formSubmitted && checkControlHasError('email')"
-        padding
+        class="ion-padding"
         >Please enter valid email address
       </ion-note>
     </ion-list>
