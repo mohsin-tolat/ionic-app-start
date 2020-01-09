@@ -8,35 +8,63 @@
 </ion-header>
 
 <ion-content padding>
-  <form>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
     <ion-list lines="full" class="ion-no-margin ion-no-padding">
       <ion-item>
-        <ion-label position="floating" class="primary"
+        <ion-label position="floating"
           ><ion-text>First Name</ion-text>
         </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="firstName"></ion-input>
       </ion-item>
+
+      <ion-note
+        color="danger"
+        *ngIf="this.formSubmitted && checkControlHasError('firstName')"
+        padding
+        >Please enter valid first name
+      </ion-note>
 
       <ion-item>
         <ion-label position="floating"
           ><ion-text>Last Name </ion-text></ion-label
         >
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="lastName"></ion-input>
       </ion-item>
+
+      <ion-note
+        color="danger"
+        *ngIf="this.formSubmitted && checkControlHasError('lastName')"
+        padding
+        >Please enter valid Last name
+      </ion-note>
 
       <ion-item>
         <ion-label position="floating">
           <ion-text>Username</ion-text>
         </ion-label>
-        <ion-input type="text"></ion-input>
+        <ion-input type="text" formControlName="userName"></ion-input>
       </ion-item>
+
+      <ion-note
+        color="danger"
+        *ngIf="this.formSubmitted && checkControlHasError('userName')"
+        padding
+        >Please enter valid user name
+      </ion-note>
 
       <ion-item>
         <ion-label position="floating"
           ><ion-text>Email address</ion-text>
         </ion-label>
-        <ion-input type="email"></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
+
+      <ion-note
+        color="danger"
+        *ngIf="this.formSubmitted && checkControlHasError('email')"
+        padding
+        >Please enter valid email address
+      </ion-note>
     </ion-list>
 
     <div class="ion-padding">

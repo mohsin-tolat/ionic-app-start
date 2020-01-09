@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Camera } from '@ionic-native/camera/ngx';
 import { IonicStorageModule } from '@ionic/storage';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,6 +20,8 @@ import { IonicStorageModule } from '@ionic/storage';
     IonicModule.forRoot({ mode: 'md' }),
     AppRoutingModule,
     IonicStorageModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [
     StatusBar,
