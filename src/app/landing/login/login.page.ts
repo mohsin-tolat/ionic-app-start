@@ -24,18 +24,12 @@ export class LoginPage implements OnInit {
     private toastService: ToastService,
     public loadingController: LoadingController,
     private router: Router
-  ) {}
-
-  // async presentToast() {
-  //   const toast = await this.toastController.create({
-  //     message: 'Registration successful.',
-  //     duration: 2000,
-  //   });
-
-  //   toast.onDidDismiss();
-
-  //   toast.present();
-  // }
+  ) {
+    this.loginForm = this.formBuilder.group({
+      userName: new FormControl('', [Validators.required]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
 
   async presentLoading() {
     const loading = await this.loadingController.create({
@@ -75,10 +69,5 @@ export class LoginPage implements OnInit {
     return false;
   }
 
-  ngOnInit() {
-    this.loginForm = this.formBuilder.group({
-      userName: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
-    });
-  }
+  ngOnInit() {}
 }

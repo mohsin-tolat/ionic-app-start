@@ -1,9 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Tab Three
+      User Name
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content fullscreen class="ion-padding">
+  <ion-list>
+    <ion-item>
+      <ion-icon slot="start" name="logo-ionic"></ion-icon>
+      <ion-label>Label with Icon</ion-label>
+    </ion-item>
+  </ion-list>
+  <section>
+    <ion-button expand="block" (click)="logout()">Logout</ion-button>
+  </section>
+</ion-content>
