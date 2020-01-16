@@ -10,9 +10,9 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngFor="let item of [1,2,3,4,5]">
+  <ng-container *ngFor="let post of allPosts">
     <ion-list class="ion-no-padding">
-      <app-photo-card></app-photo-card>
+      <app-photo-card [post]="post"></app-photo-card>
     </ion-list>
   </ng-container>
 </ion-content>

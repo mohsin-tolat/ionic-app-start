@@ -3,27 +3,23 @@
     <ion-list>
       <ion-item lines="none">
         <ion-thumbnail>
-          <img
-            src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-          />
+          <img [src]="post.uploadedUserAvatar" />
         </ion-thumbnail>
         <div class="ion-padding">
-          <ion-note>New User? </ion-note>
+          <ion-note>{{ post.uploadedByUserName }} </ion-note>
         </div>
       </ion-item>
 
       <ion-item lines="none">
-        <img
-          src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"
-        />
+        <img [src]="post.contentLink" />
       </ion-item>
 
       <ion-item lines="none">
-        <ion-label>99 Views</ion-label>
+        <ion-label>{{ post.totalLikes }} Likes</ion-label>
       </ion-item>
 
       <ion-item lines="none">
-        <ion-note>View All Comments</ion-note>
+        <ion-note>View All {{ post.totalComments }} Comments</ion-note>
       </ion-item>
     </ion-list>
   </ion-card-content>

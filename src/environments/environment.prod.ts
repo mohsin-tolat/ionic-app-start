@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  hostingEnvironment: 'PROD',
+  production: true,
+  ApiEndPoint: 'https://localhost:5001/',
 };
