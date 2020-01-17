@@ -11,4 +11,5 @@ export const AppConfig = {
 export const UrlConfig = {
   GET_ALL_NEW_POSTS_URL:
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetAllNewPosts/',
+  POST_ADD_NEW_USER_URL: AppConfig.API_ENDPOINT_PREFIX + 'api/User/AddNewUser/',
 };

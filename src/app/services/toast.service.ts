@@ -9,6 +9,7 @@ export class ToastService {
 
   async showToast(
     toastMessage: string,
+    callback: any = null,
     toastDuration = 2000,
     displayCloseButton = false
   ) {
@@ -21,14 +22,18 @@ export class ToastService {
     toast.onDidDismiss();
 
     toast.present();
+    if (callback) {
+      callback();
+    }
   }
 
   async showToastWithOptions(
     toastHeader: string,
     toastMessage: string,
+    callback: any = null,
     toastDuration = 2000,
-    displayCloseButton: boolean,
-    closeButtonTxt: string
+    displayCloseButton: boolean = false,
+    closeButtonTxt: string = ''
   ) {
     const toast = await this.toastController.create({
       header: toastHeader,
@@ -54,5 +59,9 @@ export class ToastService {
       ],
     });
     toast.present();
+
+    if (callback) {
+      callback();
+    }
   }
 }

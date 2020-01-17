@@ -5,7 +5,7 @@ import {
   Validators,
   FormControl,
 } from '@angular/forms';
-import { ToastController, LoadingController } from '@ionic/angular';
+
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
 
@@ -22,25 +22,12 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    public loadingController: LoadingController,
     private router: Router
   ) {
     this.loginForm = this.formBuilder.group({
       userName: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
-  }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait!',
-      duration: 2000,
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-
-    this.router.navigateByUrl('landing/login');
   }
 
   onSubmit() {

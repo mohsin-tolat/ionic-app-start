@@ -1,16 +1,14 @@
-import {
-  Component,
-  OnInit,
-  ɵCompiler_compileModuleSync__POST_R3__,
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
-  FormGroup,
   FormControl,
+  FormGroup,
   Validators,
 } from '@angular/forms';
-import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { LoadingService } from 'src/app/services/loading.service';
+import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-registration',
@@ -23,43 +21,35 @@ export class RegistrationPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public toastController: ToastController,
-    public loadingController: LoadingController,
+    private toastService: ToastService,
+    public loadingService: LoadingService,
+    private userService: UserService,
     private router: Router
   ) {
     this.formSubmitted = false;
   }
 
-  async presentToast() {
-    const toast = await this.toastController.create({
-      message: 'Registration successful.',
-      duration: 2000,
-    });
-
-    toast.onDidDismiss();
-
-    toast.present();
-  }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Please wait!',
-      duration: 2000,
-    });
-    await loading.present();
-
-    const { role, data } = await loading.onDidDismiss();
-
-    this.presentToast();
-    this.router.navigateByUrl('landing/login');
-  }
-
   onSubmit() {
     if (this.registrationForm.valid) {
-      this.presentLoading();
+      this.loadingService.presentLoading('Please Wait!', 3000);
+      this.userService.AddNewUser(this.registrationForm.value).subscribe(
+        result => {
+          if (result) {
+            this.presentToastAndRedirectToLoginPage();
+          }
+        },
+        error => {
+          console.error('Error occurred while adding new user');
+        }
+      );
     } else {
       this.formSubmitted = true;
     }
+  }
+
+  presentToastAndRedirectToLoginPage() {
+    this.toastService.showToast('Registration Successful!');
+    this.router.navigateByUrl('/landing/login');
   }
 
   checkControlHasError(controlName: string) {
@@ -73,14 +63,43 @@ export class RegistrationPage implements OnInit {
   }
 
   ngOnInit() {
-    this.registrationForm = this.formBuilder.group({
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
-      email: new FormControl('', [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
-      ]),
-      userName: new FormControl('', [Validators.required]),
-    });
+    this.registrationForm = this.formBuilder.group(
+      {
+        firstName: new FormControl('', [Validators.required]),
+        lastName: new FormControl('', [Validators.required]),
+        emailAddress: new FormControl('', [
+          Validators.required,
+          Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+        ]),
+        userName: new FormControl('', [Validators.required]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.pattern(
+            new RegExp(
+              '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[^\\da-zA-Z]).{8,15}$'
+            )
+          ),
+        ]),
+        confirmPassword: new FormControl('', [Validators.required]),
+      },
+      {
+        validator: this.checkIfMatchingPasswords('password', 'confirmPassword'),
+      }
+    );
+  }
+
+  checkIfMatchingPasswords(
+    passwordKey: string,
+    passwordConfirmationKey: string
+  ) {
+    return (group: FormGroup) => {
+      const passwordInput = group.controls[passwordKey],
+        passwordConfirmationInput = group.controls[passwordConfirmationKey];
+      if (passwordInput.value !== passwordConfirmationInput.value) {
+        return passwordConfirmationInput.setErrors({ notEquivalent: true });
+      } else {
+        return passwordConfirmationInput.setErrors(null);
+      }
+    };
   }
 }

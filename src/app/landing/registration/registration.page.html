@@ -56,14 +56,46 @@
         <ion-label position="floating"
           ><ion-text>Email address</ion-text>
         </ion-label>
-        <ion-input type="email" formControlName="email"></ion-input>
+        <ion-input type="email" formControlName="emailAddress"></ion-input>
       </ion-item>
 
       <ion-note
         color="danger"
-        *ngIf="this.formSubmitted && checkControlHasError('email')"
+        *ngIf="this.formSubmitted && checkControlHasError('emailAddress')"
         class="ion-padding"
         >Please enter valid email address
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="floating"
+          ><ion-text>Password</ion-text>
+        </ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+
+      <ion-note
+        color="danger"
+        *ngIf="this.formSubmitted && checkControlHasError('password')"
+        class="ion-padding"
+        >Please enter valid password
+      </ion-note>
+
+      <ion-item>
+        <ion-label position="floating"
+          ><ion-text>Confirm Password</ion-text>
+        </ion-label>
+        <ion-input
+          type="password"
+          formControlName="confirmPassword"
+        ></ion-input>
+      </ion-item>
+
+      <ion-note
+        color="danger"
+        *ngIf="this.formSubmitted && checkControlHasError('confirmPassword')"
+        class="ion-padding"
+        >Please enter valid confirm password and both password & confirm
+        password must be same.
       </ion-note>
     </ion-list>
 
