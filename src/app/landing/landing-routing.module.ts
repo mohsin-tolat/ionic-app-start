@@ -34,11 +34,6 @@ const routes: Routes = [
     redirectTo: '/landing/login',
     pathMatch: 'full',
   },
-  {
-    path: '**',
-    redirectTo: '/landing/NotFound',
-    pathMatch: 'full',
-  },
 ];
 
 @NgModule({

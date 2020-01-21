@@ -3,15 +3,18 @@ import {
   ActivatedRouteSnapshot,
   CanActivate,
   RouterStateSnapshot,
-  Router,
 } from '@angular/router';
+import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { UserService } from 'src/app/services/user.service';
-import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private localStorageService: LocalStorageService
+  ) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -22,10 +25,12 @@ export class AuthGuard implements CanActivate {
         if (res) {
           return res;
         } else {
+          this.localStorageService.clear();
           return false;
         }
       }),
       catchError(err => {
+        this.localStorageService.clear();
         return of(false);
       })
     );
