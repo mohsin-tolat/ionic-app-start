@@ -1,13 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConfig, UrlConfig } from 'src/shared/appConfig';
 import { Observable } from 'rxjs';
 import { PostDto } from 'src/shared/models/postDto';
 import { PagedResult } from 'src/shared/models/pagedResult';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable()
 export class PostService {
-  constructor(private httpClient: HttpClient) {}
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+
+  constructor(
+    private httpClient: HttpClient,
+    private localStorageService: LocalStorageService
+  ) {}
 
   public GetAllNewPosts(
     pageNo: number,
@@ -20,6 +30,6 @@ export class PostService {
       pageNo +
       '&pageSize=' +
       pageSize;
-    return this.httpClient.get<PagedResult<PostDto>>(url);
+    return this.httpClient.get<PagedResult<PostDto>>(url, this.httpOptions);
   }
 }

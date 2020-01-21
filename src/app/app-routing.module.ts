@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/shared/guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -9,8 +10,13 @@ const routes: Routes = [
   },
   {
     path: 'tabs',
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./tabs/tabs.module').then(m => m.TabsPageModule),
+  },
+  {
+    path: '**',
+    redirectTo: '/landing/NotFound',
   },
 ];
 @NgModule({

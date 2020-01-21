@@ -8,6 +8,9 @@ import {
 
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/services/toast.service';
+import { UserService } from 'src/app/services/user.service';
+import { LocalStorageService } from 'ngx-webstorage';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +25,10 @@ export class LoginPage implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private router: Router
+    private router: Router,
+    private userService: UserService,
+    private localStorageService: LocalStorageService,
+    private loadingService: LoadingService
   ) {
     this.loginForm = this.formBuilder.group({
       userName: new FormControl('', [Validators.required]),
@@ -32,6 +38,7 @@ export class LoginPage implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
+      this.loadingService.presentLoading();
       this.checkLogin();
     } else {
       this.formSubmitted = true;
@@ -39,14 +46,26 @@ export class LoginPage implements OnInit {
   }
 
   checkLogin() {
-    if (
-      this.loginForm.controls.userName.value === 'admin' &&
-      this.loginForm.controls.password.value === 'admin'
-    ) {
-      this.router.navigateByUrl('/tabs');
-    } else {
-      this.toastService.showToast('Please enver valid username or password.');
-    }
+    this.userService.Login(this.loginForm.value).subscribe(
+      result => {
+        if (result && result.token) {
+          this.localStorageService.store('token', result.token);
+          this.router.navigateByUrl('/tabs');
+        } else {
+          this.toastService.showToast(
+            'Please enver valid username or password.'
+          );
+        }
+      },
+      error => {
+        if (error.error && error.error.message) {
+          this.toastService.showToast(error.error.message);
+        }
+        this.toastService.showToast(
+          'Something went wrong, Please try again later.'
+        );
+      }
+    );
   }
 
   checkControlHasError(controlName: string) {

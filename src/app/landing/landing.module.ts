@@ -7,6 +7,7 @@ import { LandingPage } from './landing.page';
 import { LoginPage } from './login/login.page';
 import { RegistrationPage } from './registration/registration.page';
 import { ToastService } from '../services/toast.service';
+import { NotfoundPage } from './notfound/notfound.page';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { ToastService } from '../services/toast.service';
     IonicModule,
     LandingPageRoutingModule,
   ],
-  declarations: [LandingPage, LoginPage, RegistrationPage],
+  declarations: [LandingPage, LoginPage, RegistrationPage, NotfoundPage],
   providers: [ToastService],
 })
 export class LandingPageModule {}

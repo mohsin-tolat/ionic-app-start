@@ -8,7 +8,7 @@ export class LoadingService {
   constructor(public loadingController: LoadingController) {}
 
   async presentLoading(
-    loadingMessage: string,
+    loadingMessage: string = 'Please wait!',
     loadingDuration = 2000,
     callback: any = null
   ) {
