@@ -12,5 +12,8 @@ export class PhotoCardComponent implements OnInit {
 
   constructor() {}
 
+  likePost(postId: number) {
+  }
+
   ngOnInit() {}
 }

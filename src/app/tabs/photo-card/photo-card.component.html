@@ -13,6 +13,13 @@
       <ion-item lines="none">
         <img [src]="post.contentLink" />
       </ion-item>
+      <ion-item lines="none">
+        <ion-buttons>
+          <button ion-button (click)="this.likePost(post.id)">
+            <ion-icon name="heart-empty"></ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-item>
 
       <ion-item lines="none">
         <ion-label>{{ post.totalLikes }} Likes</ion-label>

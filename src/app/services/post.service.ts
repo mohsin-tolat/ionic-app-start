@@ -25,11 +25,15 @@ export class PostService {
   ): Observable<PagedResult<PostDto>> {
     const url =
       UrlConfig.GET_ALL_NEW_POSTS_URL +
-      10 +
       '?pageNo=' +
       pageNo +
       '&pageSize=' +
       pageSize;
     return this.httpClient.get<PagedResult<PostDto>>(url, this.httpOptions);
+  }
+
+  public LikePost(postId: number) {
+    const url = UrlConfig.POST_LIKEPOST_URL + '/' + postId;
+    return this.httpClient.post<PagedResult<PostDto>>(url, this.httpOptions);
   }
 }
