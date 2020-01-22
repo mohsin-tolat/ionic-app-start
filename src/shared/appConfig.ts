@@ -9,11 +9,11 @@ export const AppConfig = {
 };
 
 export const UrlConfig = {
-  GET_ALL_NEW_POSTS_URL:
-    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetAllNewPosts',
-  POST_ADD_NEW_USER_URL: AppConfig.API_ENDPOINT_PREFIX + 'api/User/AddNewUser',
-  POST_AUTHENTICATE: AppConfig.API_ENDPOINT_PREFIX + 'api/Login/Authenticate',
-  GET_CHECK_AUTHORIZATION_URL:
+  GET_AllNewPosts: AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetAllNewPosts',
+  POST_AddNewUser: AppConfig.API_ENDPOINT_PREFIX + 'api/User/AddNewUser',
+  POST_Authenticate: AppConfig.API_ENDPOINT_PREFIX + 'api/Login/Authenticate',
+  GET_Check_Authorization:
     AppConfig.API_ENDPOINT_PREFIX + 'api/Login/CheckAuthorization',
-  POST_LIKEPOST_URL: AppConfig.API_ENDPOINT_PREFIX + 'api/Post/LikePost',
+  POST_LikeDislikePost:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/LikeDislikePost',
 };

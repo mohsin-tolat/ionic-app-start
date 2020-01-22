@@ -19,18 +19,18 @@ export class UserService {
   };
 
   public AddNewUser(registrationDetails: UserRegistration): any {
-    const url = UrlConfig.POST_ADD_NEW_USER_URL;
+    const url = UrlConfig.POST_AddNewUser;
     return this.httpClient.post(url, registrationDetails, this.httpOptions);
   }
 
   public IsLoggednIn(): Observable<boolean> {
-    return this.httpClient.get<boolean>(UrlConfig.GET_CHECK_AUTHORIZATION_URL);
+    return this.httpClient.get<boolean>(UrlConfig.GET_Check_Authorization);
   }
 
   public Login(
     authenticateModel: AuthenticateModel
   ): Observable<LoggedInUserModel> {
-    const url = UrlConfig.POST_AUTHENTICATE;
+    const url = UrlConfig.POST_Authenticate;
     return this.httpClient.post<LoggedInUserModel>(
       url,
       authenticateModel,

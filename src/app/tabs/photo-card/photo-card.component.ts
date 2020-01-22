@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PostDto } from 'src/shared/models/postDto';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
   selector: 'app-photo-card',
@@ -10,9 +11,19 @@ export class PhotoCardComponent implements OnInit {
   @Input()
   post: PostDto;
 
-  constructor() {}
+  constructor(private postService: PostService) {}
 
-  likePost(postId: number) {
+  onLikeButtonClick(postId: number) {
+    this.postService.LikePost(postId).subscribe(
+      result => {
+        if (result) {
+          this.post = result;
+        }
+      },
+      err => {
+        console.error('Error Occurred in onLikeButtonClick');
+      }
+    );
   }
 
   ngOnInit() {}

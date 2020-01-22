@@ -10,6 +10,7 @@ import { PagedResult } from 'src/shared/models/pagedResult';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit, OnDestroy {
+  updatedPost: PostDto;
   constructor(private postService: PostService) {}
   pagedResult: PagedResult<PostDto>;
   allNewPosts: PostDto[] = [];

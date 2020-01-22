@@ -24,7 +24,7 @@ export class PostService {
     pageSize: number
   ): Observable<PagedResult<PostDto>> {
     const url =
-      UrlConfig.GET_ALL_NEW_POSTS_URL +
+      UrlConfig.GET_AllNewPosts +
       '?pageNo=' +
       pageNo +
       '&pageSize=' +
@@ -32,8 +32,8 @@ export class PostService {
     return this.httpClient.get<PagedResult<PostDto>>(url, this.httpOptions);
   }
 
-  public LikePost(postId: number) {
-    const url = UrlConfig.POST_LIKEPOST_URL + '/' + postId;
-    return this.httpClient.post<PagedResult<PostDto>>(url, this.httpOptions);
+  public LikePost(postId: number): Observable<PostDto> {
+    const url = UrlConfig.POST_LikeDislikePost + '/' + postId;
+    return this.httpClient.post<PostDto>(url, this.httpOptions);
   }
 }
