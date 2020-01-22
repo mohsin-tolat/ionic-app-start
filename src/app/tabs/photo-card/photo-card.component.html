@@ -1,33 +1,41 @@
 <ion-card>
-  <ion-card-content>
-    <ion-list>
-      <ion-item lines="none">
-        <ion-thumbnail>
-          <img [src]="post.uploadedUserAvatar" />
-        </ion-thumbnail>
-        <div class="ion-padding">
-          <ion-note>{{ post.uploadedByUserName }} </ion-note>
-        </div>
-      </ion-item>
+  <ion-item lines="none">
+    <ion-thumbnail>
+      <img [src]="post.uploadedUserAvatar" />
+    </ion-thumbnail>
+    <ion-label class="ion-padding">{{ post.uploadedByUserName }}</ion-label>
+  </ion-item>
 
-      <ion-item lines="none">
-        <img [src]="post.contentLink" />
-      </ion-item>
-      <ion-item lines="none">
-        <ion-buttons>
-          <button ion-button (click)="this.onLikeButtonClick(post.id)">
-            <ion-icon name="heart-empty"></ion-icon>
-          </button>
-        </ion-buttons>
-      </ion-item>
+  <img [src]="post.contentLink" />
 
-      <ion-item lines="none">
-        <ion-label>{{ post.totalLikes }} Likes</ion-label>
-      </ion-item>
+  <ion-item lines="none">
+    <ion-buttons
+      size="large"
+      color="light"
+      fill="none"
+      (click)="this.onLikeButtonClick(post.id)"
+      *ngIf="!post.isCurrentUserLikedPost"
+      ><ion-icon size="large" name="heart-empty"></ion-icon
+    ></ion-buttons>
 
-      <ion-item lines="none">
-        <ion-note>View All {{ post.totalComments }} Comments</ion-note>
-      </ion-item>
-    </ion-list>
-  </ion-card-content>
+    <ion-buttons
+      size="large"
+      color="danger"
+      fill="none"
+      (click)="this.onLikeButtonClick(post.id)"
+      *ngIf="post.isCurrentUserLikedPost"
+      ><ion-icon size="large" name="heart" color="danger"></ion-icon
+    ></ion-buttons>
+  </ion-item>
+
+  <ion-item lines="none">
+    <ion-label>{{ post.totalLikes }} Likes</ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="post.totalComments > 0" lines="none">
+    <ion-note>View All {{ post.totalComments }} Comments</ion-note>
+  </ion-item>
+  <ion-item *ngIf="post.uploadOn" lines="none">
+    {{ post.uploadOn | timeago: live }}
+  </ion-item>
 </ion-card>
