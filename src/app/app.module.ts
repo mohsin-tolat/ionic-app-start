@@ -8,7 +8,6 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { TimeagoModule } from 'ngx-timeago';
 import { NgxWebstorageModule } from 'ngx-webstorage';
 import { AuthInterceptor } from 'src/shared/Interceptor/auth-interceptor';
 import { SharedModule } from './../shared/shared.module';
@@ -28,7 +27,6 @@ import { AppComponent } from './app.component';
     ReactiveFormsModule,
     SharedModule,
     NgxWebstorageModule.forRoot(),
-    TimeagoModule.forRoot(),
   ],
   providers: [
     StatusBar,
