@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <!-- <ion-searchbar></ion-searchbar> -->
+    <ion-searchbar
+      (ionChange)="searchUser()"
+      [(ngModel)]="searchText"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <app-user-list
+    [userDetails]="userDetails"
+    *ngFor="let userDetails of allNewUser"
+  ></app-user-list>
+  <ion-label *ngIf="allNewUser && allNewUser.length == 0">
+    No User Found.
+  </ion-label>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

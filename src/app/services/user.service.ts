@@ -6,6 +6,8 @@ import {
   AuthenticateModel,
   LoggedInUserModel,
 } from 'src/shared/models/authenticateModel';
+import { PagedResult } from 'src/shared/models/pagedResult';
+import { UserDto } from 'src/shared/models/userDto.model';
 import { UserRegistration } from 'src/shared/models/userRegistration';
 
 @Injectable()
@@ -36,5 +38,22 @@ export class UserService {
       authenticateModel,
       this.httpOptions
     );
+  }
+
+  public GetUserBasedOnSearch(
+    searchText: string,
+    pageNo: number,
+    pageSize: number
+  ): Observable<PagedResult<UserDto>> {
+    const url =
+      UrlConfig.GET_UserListBasedOnSearch +
+      '?searchText=' +
+      searchText +
+      '&pageNo=' +
+      pageNo +
+      '&pageSize=' +
+      pageSize;
+
+    return this.httpClient.get<PagedResult<UserDto>>(url, this.httpOptions);
   }
 }

@@ -16,4 +16,6 @@ export const UrlConfig = {
     AppConfig.API_ENDPOINT_PREFIX + 'api/Login/CheckAuthorization',
   POST_LikeDislikePost:
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/LikeDislikePost',
+  GET_UserListBasedOnSearch:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/User/GetUserDetailsBasedOnSearch',
 };
