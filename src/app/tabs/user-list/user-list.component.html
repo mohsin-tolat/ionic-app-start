@@ -1,6 +1,30 @@
-<ion-item lines="none">
-  <ion-thumbnail>
+<ion-item>
+  <ion-avatar slot="start">
     <img [src]="userDetails.userAvatar" />
-  </ion-thumbnail>
-  <ion-label class="ion-padding">{{ userDetails.username }}</ion-label>
+  </ion-avatar>
+  <ion-label>
+    <a
+      [routerLink]="['/tabs/userDetails']"
+      routerLinkActive="router-link-active"
+      router-direction="forward"
+      class="user-clickable-link"
+      [queryParams]="{
+        userHashId: userDetails.userHashId,
+        userName: userDetails.username
+      }"
+    >
+      <ion-label class="ion-padding">{{ userDetails.username }}</ion-label>
+    </a>
+  </ion-label>
+  <ion-button
+    (click)="followUser(userDetails.userHashId)"
+    *ngIf="!userDetails.isAlreadyFollowed"
+    color="primary"
+    >Follow</ion-button
+  >
+
+  <ion-chip *ngIf="isUserFollowSuccess" outline color="primary">
+    <ion-label>Followed</ion-label>
+    <ion-icon name="checkmark"></ion-icon>
+  </ion-chip>
 </ion-item>

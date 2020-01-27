@@ -13,8 +13,8 @@ export class PhotoCardComponent implements OnInit {
 
   constructor(private postService: PostService) {}
 
-  onLikeButtonClick(postId: number) {
-    this.postService.LikePost(postId).subscribe(
+  onLikeButtonClick(postHashId: string) {
+    this.postService.LikePost(postHashId).subscribe(
       result => {
         if (result) {
           this.post = result;

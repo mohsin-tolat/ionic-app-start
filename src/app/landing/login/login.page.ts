@@ -50,6 +50,7 @@ export class LoginPage implements OnInit {
       result => {
         if (result && result.token) {
           this.localStorageService.store('token', result.token);
+          this.localStorageService.store('currentUserName', result.username);
           this.router.navigateByUrl('/tabs');
         } else {
           this.toastService.showToast(

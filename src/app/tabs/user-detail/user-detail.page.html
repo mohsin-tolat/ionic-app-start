@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="['/tabs/searchTab']"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.username}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-user-detail-child
+    *ngIf="userDetailsResponse"
+    [userDetails]="this.userDetailsResponse"
+  >
+  </app-user-detail-child>
+</ion-content>

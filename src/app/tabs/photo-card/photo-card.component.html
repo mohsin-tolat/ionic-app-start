@@ -3,7 +3,21 @@
     <ion-thumbnail>
       <img [src]="post.uploadedUserAvatar" />
     </ion-thumbnail>
-    <ion-label class="ion-padding">{{ post.uploadedByUserName }}</ion-label>
+
+    <ion-label>
+      <a
+        [routerLink]="['/tabs/userDetails']"
+        routerLinkActive="router-link-active"
+        router-direction="forward"
+        class="user-clickable-link"
+        [queryParams]="{
+          userHashId: post.uploadedByUserHashId,
+          userName: post.uploadedByUserName
+        }"
+      >
+        <ion-label class="ion-padding">{{ post.uploadedByUserName }}</ion-label>
+      </a>
+    </ion-label>
   </ion-item>
 
   <img [src]="post.contentLink" />
@@ -13,7 +27,7 @@
       size="large"
       color="light"
       fill="none"
-      (click)="this.onLikeButtonClick(post.id)"
+      (click)="this.onLikeButtonClick(post.postHashId)"
       *ngIf="!post.isCurrentUserLikedPost"
       ><ion-icon size="large" name="heart-empty"></ion-icon
     ></ion-buttons>
@@ -22,7 +36,7 @@
       size="large"
       color="danger"
       fill="none"
-      (click)="this.onLikeButtonClick(post.id)"
+      (click)="this.onLikeButtonClick(post.postHashId)"
       *ngIf="post.isCurrentUserLikedPost"
       ><ion-icon size="large" name="heart" color="danger"></ion-icon
     ></ion-buttons>

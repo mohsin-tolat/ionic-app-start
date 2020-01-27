@@ -1,5 +1,6 @@
 export class PostDto {
-  public id: number;
+  // public id: number;
+  public postHashId: string;
   public uploadBy: number;
   public contentLink: string;
   public isCurrentUserLikedPost: boolean;
@@ -8,4 +9,5 @@ export class PostDto {
   public uploadedByUserName: string;
   public uploadedUserAvatar: string;
   public totalComments: number;
+  public uploadedByUserHashId: string;
 }

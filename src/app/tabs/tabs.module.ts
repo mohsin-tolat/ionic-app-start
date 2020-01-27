@@ -13,6 +13,8 @@ import { Tab3Page } from './tab3/tab3.page';
 import { TabsPageRoutingModule } from './tabs-routing.module';
 import { TabsPage } from './tabs.page';
 import { UserListComponent } from './user-list/user-list.component';
+import { UserDetailPage } from './user-detail/user-detail.page';
+import { UserDetailChildComponent } from './user-detail-child/user-detail-child.component';
 
 @NgModule({
   imports: [
@@ -31,6 +33,8 @@ import { UserListComponent } from './user-list/user-list.component';
     PhotoCardComponent,
     UserListComponent,
     SearchTabPage,
+    UserDetailPage,
+    UserDetailChildComponent,
   ],
   providers: [PostService],
 })

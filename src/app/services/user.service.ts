@@ -9,6 +9,7 @@ import {
 import { PagedResult } from 'src/shared/models/pagedResult';
 import { UserDto } from 'src/shared/models/userDto.model';
 import { UserRegistration } from 'src/shared/models/userRegistration';
+import { UserDetailChildComponent } from '../tabs/user-detail-child/user-detail-child.component';
 
 @Injectable()
 export class UserService {
@@ -55,5 +56,26 @@ export class UserService {
       pageSize;
 
     return this.httpClient.get<PagedResult<UserDto>>(url, this.httpOptions);
+  }
+
+  followUser(followingUserId: number): Observable<boolean> {
+    const url =
+      UrlConfig.POST_FollowUser + '?followingUserHashId=' + followingUserId;
+
+    return this.httpClient.post<boolean>(url, this.httpOptions);
+  }
+
+  unFollowUser(followingUserId: number): Observable<boolean> {
+    const url =
+      UrlConfig.POST_UnFollowUser + '?followingUserHashId=' + followingUserId;
+
+    return this.httpClient.post<boolean>(url, this.httpOptions);
+  }
+
+  getUserDetails(userHashId: any): Observable<UserDto> {
+    const url =
+      UrlConfig.GET_UserDetails + '?userHashId=' + userHashId;
+
+    return this.httpClient.get<UserDto>(url, this.httpOptions);
   }
 }

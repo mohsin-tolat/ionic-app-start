@@ -5,6 +5,7 @@ import { Tab1Page } from './tab1/tab1.page';
 import { Tab2Page } from './tab2/tab2.page';
 import { Tab3Page } from './tab3/tab3.page';
 import { TabsPage } from './tabs.page';
+import { UserDetailPage } from './user-detail/user-detail.page';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
       {
         path: 'searchTab',
         component: SearchTabPage,
+      },
+      {
+        path: 'userDetails',
+        component: UserDetailPage,
       },
     ],
   },

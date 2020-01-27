@@ -1,0 +1,59 @@
+<ion-content>
+  <ion-grid style="text-align: center;">
+    <ion-row>
+      <ion-col>
+        <img [src]="userDetails.userAvatar" />
+      </ion-col>
+      <ion-col>
+        <h2>{{ userDetails.totalPostCount }}</h2>
+        <ion-note>
+          Posts
+        </ion-note>
+      </ion-col>
+      <ion-col>
+        <h2>{{ userDetails.totalFollowers }}</h2>
+        <ion-note>
+          Followers
+        </ion-note>
+      </ion-col>
+      <ion-col>
+        <h2>{{ userDetails.totalFollowings }}</h2>
+        <ion-note>
+          Followings
+        </ion-note>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div *ngIf="userDetails.isCurrentUser" class="ion-padding">
+    <ion-button expand="block" type="submit" class="ion-no-margin"
+      >Edit Profile</ion-button
+    >
+  </div>
+  <div *ngIf="!userDetails.isCurrentUser" class="ion-padding">
+    <ion-grid *ngIf="!userDetails.isCurrentUser" style="text-align: center;">
+      <ion-row>
+        <ion-col
+          ><ion-button
+            *ngIf="!userDetails.isAlreadyFollowed"
+            expand="block"
+            type="submit"
+            class="ion-no-margin"
+            >Follow</ion-button
+          >
+          <ion-button
+            *ngIf="userDetails.isAlreadyFollowed"
+            expand="block"
+            type="submit"
+            class="ion-no-margin"
+            >Un Follow</ion-button
+          >
+        </ion-col>
+        <ion-col>
+          <ion-button expand="block" type="submit" class="ion-no-margin"
+            >Message</ion-button
+          ></ion-col
+        >
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
