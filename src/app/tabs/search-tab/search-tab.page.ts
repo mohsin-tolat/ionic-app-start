@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { PagedResult } from 'src/shared/models/pagedResult';
-import { UserDto } from 'src/shared/models/userDto.model';
+import { PagedResult } from './../../../shared/models/pagedResult';
+import { UserDto } from './../../../shared/models/userDto.model';
+import { UserService } from './../../services/user.service';
 
 @Component({
   selector: 'app-search-tab',
@@ -27,13 +27,14 @@ export class SearchTabPage implements OnInit, OnDestroy {
         this.appendNewUserBasedOnSearch(true, this.currentPage, 10);
         event.target.complete();
       } else {
-        event.target.disabled = true;
+        event.target.complete();
       }
     }, 500);
   }
 
   searchUser() {
-    if (this.searchText.length <= 3) {
+    this.searchText = this.searchText.trim();
+    if (!this.searchText || this.searchText.length <= 3) {
       return;
     } else {
       this.allUserBasedOnSearchPagedResult = new PagedResult<UserDto>(1, 10);

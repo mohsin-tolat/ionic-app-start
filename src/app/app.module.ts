@@ -9,7 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { NgxWebstorageModule } from 'ngx-webstorage';
-import { AuthInterceptor } from 'src/shared/Interceptor/auth-interceptor';
+import { AuthInterceptor } from './../shared/Interceptor/auth-interceptor';
 import { SharedModule } from './../shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

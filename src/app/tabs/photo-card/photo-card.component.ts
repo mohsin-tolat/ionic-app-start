@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PostDto } from 'src/shared/models/postDto';
-import { PostService } from 'src/app/services/post.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { PostService } from './../../services/post.service';
+import { PostDto } from './../../../shared/models/postDto';
 
 @Component({
   selector: 'app-photo-card',

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppConfig, UrlConfig } from 'src/shared/appConfig';
+import { AppConfig, UrlConfig } from './../../shared/appConfig';
 import { Observable } from 'rxjs';
-import { PostDto } from 'src/shared/models/postDto';
-import { PagedResult } from 'src/shared/models/pagedResult';
+import { PostDto } from './../../shared/models/postDto';
+import { PagedResult } from './../../shared/models/pagedResult';
 import { LocalStorageService } from 'ngx-webstorage';
 
 @Injectable()

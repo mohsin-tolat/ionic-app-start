@@ -1,8 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { PostDto } from 'src/shared/models/postDto';
-import { PostService } from 'src/app/services/post.service';
-import { Subscriber } from 'rxjs';
-import { PagedResult } from 'src/shared/models/pagedResult';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PagedResult } from './../../../shared/models/pagedResult';
+import { PostDto } from './../../../shared/models/postDto';
+import { PostService } from './../../services/post.service';
 
 @Component({
   selector: 'app-tab1',
@@ -28,7 +27,7 @@ export class Tab1Page implements OnInit, OnDestroy {
         this.getNewPosts(this.currentPage, 10);
         event.target.complete();
       } else {
-        event.target.disabled = true;
+        event.target.complete();
       }
     }, 500);
   }

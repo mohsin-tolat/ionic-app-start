@@ -7,7 +7,7 @@ import {
 import { LocalStorageService } from 'ngx-webstorage';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from './../../app/services/user.service';
 
 @Injectable()
 export class AuthGuard implements CanActivate {

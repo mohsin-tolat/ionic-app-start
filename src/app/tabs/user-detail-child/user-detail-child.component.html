@@ -38,6 +38,7 @@
             expand="block"
             type="submit"
             class="ion-no-margin"
+            (click)="this.followUser(userDetails.userHashId)"
             >Follow</ion-button
           >
           <ion-button
@@ -45,6 +46,7 @@
             expand="block"
             type="submit"
             class="ion-no-margin"
+            (click)="this.unFollowUser(userDetails.userHashId)"
             >Un Follow</ion-button
           >
         </ion-col>

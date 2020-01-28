@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
-import { UserDto } from 'src/shared/models/userDto.model';
+import { UserService } from './../../../app/services/user.service';
+import { UserDto } from './../../../shared/models/userDto.model';
 
 @Component({
   selector: 'app-user-list',

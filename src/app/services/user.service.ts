@@ -1,15 +1,14 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { UrlConfig } from 'src/shared/appConfig';
+import { UrlConfig } from './../../shared/appConfig';
 import {
   AuthenticateModel,
   LoggedInUserModel,
-} from 'src/shared/models/authenticateModel';
-import { PagedResult } from 'src/shared/models/pagedResult';
-import { UserDto } from 'src/shared/models/userDto.model';
-import { UserRegistration } from 'src/shared/models/userRegistration';
-import { UserDetailChildComponent } from '../tabs/user-detail-child/user-detail-child.component';
+} from './../../shared/models/authenticateModel';
+import { PagedResult } from './../../shared/models/pagedResult';
+import { UserDto } from './../../shared/models/userDto.model';
+import { UserRegistration } from './../../shared/models/userRegistration';
 
 @Injectable()
 export class UserService {
@@ -73,8 +72,7 @@ export class UserService {
   }
 
   getUserDetails(userHashId: any): Observable<UserDto> {
-    const url =
-      UrlConfig.GET_UserDetails + '?userHashId=' + userHashId;
+    const url = UrlConfig.GET_UserDetails + '?userHashId=' + userHashId;
 
     return this.httpClient.get<UserDto>(url, this.httpOptions);
   }

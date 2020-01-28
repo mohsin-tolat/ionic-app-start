@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/user.service';
-import { UserDto } from 'src/shared/models/userDto.model';
+import { UserService } from './../../services/user.service';
+import { UserDto } from './../../../shared/models/userDto.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-user-detail',
@@ -13,7 +14,11 @@ export class UserDetailPage implements OnInit, OnDestroy {
   userHashId: any;
   userDetailsResponse: UserDto;
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService,
+    private location: Location
+  ) {
     this.route.queryParams.subscribe(params => {
       this.username = params.userName;
       this.userHashId = params.userHashId;
@@ -34,9 +39,18 @@ export class UserDetailPage implements OnInit, OnDestroy {
     );
   }
 
+  goBack() {
+    this.location.back();
+  }
+
   ngOnDestroy(): void {
     this.userDetailsResponse = null;
     this.username = '';
     this.userHashId = '';
+  }
+
+  public updateUserDetails(userHashId: string) {
+    this.userHashId = userHashId;
+    this.getUserDetails();
   }
 }

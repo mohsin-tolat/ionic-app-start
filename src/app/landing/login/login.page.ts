@@ -7,10 +7,10 @@ import {
 } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { ToastService } from 'src/app/services/toast.service';
-import { UserService } from 'src/app/services/user.service';
+import { ToastService } from './../../../app/services/toast.service';
+import { UserService } from './../../../app/services/user.service';
 import { LocalStorageService } from 'ngx-webstorage';
-import { LoadingService } from 'src/app/services/loading.service';
+import { LoadingService } from './../../../app/services/loading.service';
 
 @Component({
   selector: 'app-login',
