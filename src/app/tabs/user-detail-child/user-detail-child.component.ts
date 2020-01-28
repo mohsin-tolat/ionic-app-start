@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  OnDestroy,
+} from '@angular/core';
 import { PostService } from 'src/app/services/post.service';
 import { UserService } from './../../../app/services/user.service';
 import { PagedResult } from './../../../shared/models/pagedResult';
@@ -10,13 +17,13 @@ import { UserDto } from './../../../shared/models/userDto.model';
   templateUrl: './user-detail-child.component.html',
   styleUrls: ['./user-detail-child.component.scss'],
 })
-export class UserDetailChildComponent implements OnInit {
+export class UserDetailChildComponent implements OnInit, OnDestroy {
   @Input()
   userDetails: UserDto;
 
   allUserPostPagedResult: PagedResult<PostDto>;
   currentPage: any;
-  allUserPosts: PostDto[];
+  allUserPosts: PostDto[] = [];
 
   @Output() userHashIdEmitter = new EventEmitter<string>();
 
@@ -89,5 +96,11 @@ export class UserDetailChildComponent implements OnInit {
         console.error('Error occrred while following user', err);
       }
     );
+  }
+
+  ngOnDestroy(): void {
+    this.allUserPostPagedResult = null;
+    this.currentPage = 1;
+    this.allUserPosts = [];
   }
 }

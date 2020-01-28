@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        class="visible-ion-back-button"
+        (click)="this.goBack()"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Post</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-photo-card *ngIf="this.postDetails" [post]="this.postDetails">
+  </app-photo-card>
+</ion-content>

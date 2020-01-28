@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
   Validators,
-  FormControl,
 } from '@angular/forms';
-
 import { Router } from '@angular/router';
-import { ToastService } from './../../../app/services/toast.service';
-import { UserService } from './../../../app/services/user.service';
 import { LocalStorageService } from 'ngx-webstorage';
 import { LoadingService } from './../../../app/services/loading.service';
+import { ToastService } from './../../../app/services/toast.service';
+import { UserService } from './../../../app/services/user.service';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
-export class LoginPage implements OnInit {
+export class LoginPage implements OnInit, OnDestroy {
   public loginForm: FormGroup;
 
   formSubmitted: boolean;
@@ -28,7 +28,8 @@ export class LoginPage implements OnInit {
     private router: Router,
     private userService: UserService,
     private localStorageService: LocalStorageService,
-    private loadingService: LoadingService
+    private loadingService: LoadingService,
+    private navController: NavController
   ) {
     this.loginForm = this.formBuilder.group({
       userName: new FormControl('', [Validators.required]),
@@ -51,7 +52,8 @@ export class LoginPage implements OnInit {
         if (result && result.token) {
           this.localStorageService.store('token', result.token);
           this.localStorageService.store('currentUserName', result.username);
-          this.router.navigateByUrl('/tabs');
+          // this.router.navigateByUrl('/tabs');
+          this.navController.navigateRoot(['/tabs']);
         } else {
           this.toastService.showToast(
             'Please enver valid username or password.'
@@ -59,12 +61,13 @@ export class LoginPage implements OnInit {
         }
       },
       error => {
-        if (error.error && error.error.message) {
+        if (error && error.error.message && error.error.message) {
           this.toastService.showToast(error.error.message);
+        } else {
+          this.toastService.showToast(
+            'Something went wrong, Please try again later.'
+          );
         }
-        this.toastService.showToast(
-          'Something went wrong, Please try again later.'
-        );
       }
     );
   }
@@ -74,6 +77,19 @@ export class LoginPage implements OnInit {
       return true;
     }
     return false;
+  }
+
+  ionViewDidLeave(): void {
+    console.log('ionViewDidLeave');
+    this.loginForm = null;
+    this.formSubmitted = false;
+    this.formBuilder = null;
+  }
+
+  ngOnDestroy(): void {
+    this.loginForm = null;
+    this.formSubmitted = false;
+    this.formBuilder = null;
   }
 
   ngOnInit() {}

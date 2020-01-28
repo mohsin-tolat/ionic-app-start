@@ -75,7 +75,17 @@
         sizeXs="4"
         *ngFor="let userPost of this.allUserPosts"
       >
-        <img class="img-wrapper" [src]="userPost.contentLink" />
+        <a
+          [routerLink]="['/tabs/postDetails']"
+          routerLinkActive="router-link-active"
+          router-direction="forward"
+          class="user-clickable-link"
+          [queryParams]="{
+            postHashId: userPost.postHashId
+          }"
+        >
+          <img class="img-wrapper" [src]="userPost.contentLink" />
+        </a>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -44,4 +44,9 @@ export class PostService {
       pageSize;
     return this.httpClient.get<PagedResult<PostDto>>(url, this.httpOptions);
   }
+
+  public GetPostByHashId(postHashId: string): Observable<PostDto> {
+    const url = UrlConfig.GET_PostByHashId + '?postHashId=' + postHashId;
+    return this.httpClient.get<PostDto>(url, this.httpOptions);
+  }
 }

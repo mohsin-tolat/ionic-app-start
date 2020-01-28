@@ -6,6 +6,7 @@ import { TimeagoModule } from 'ngx-timeago';
 import { PostService } from '../services/post.service';
 import { SharedModule } from './../../shared/shared.module';
 import { PhotoCardComponent } from './photo-card/photo-card.component';
+import { PostDetailPage } from './post-detail/post-detail.page';
 import { SearchTabPage } from './search-tab/search-tab.page';
 import { Tab1Page } from './tab1/tab1.page';
 import { Tab2Page } from './tab2/tab2.page';
@@ -35,6 +36,7 @@ import { UserListComponent } from './user-list/user-list.component';
     SearchTabPage,
     UserDetailPage,
     UserDetailChildComponent,
+    PostDetailPage,
   ],
   providers: [PostService],
 })

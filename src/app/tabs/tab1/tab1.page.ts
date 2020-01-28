@@ -9,7 +9,6 @@ import { PostService } from './../../services/post.service';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit, OnDestroy {
-  updatedPost: PostDto;
   constructor(private postService: PostService) {}
   pagedResult: PagedResult<PostDto>;
   allNewPosts: PostDto[] = [];
@@ -51,5 +50,7 @@ export class Tab1Page implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.currentPage = 1;
+    this.pagedResult = null;
+    this.allNewPosts = [];
   }
 }
