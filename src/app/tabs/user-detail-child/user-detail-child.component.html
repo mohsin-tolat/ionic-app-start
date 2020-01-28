@@ -1,22 +1,22 @@
 <ion-content>
   <ion-grid style="text-align: center;">
     <ion-row>
-      <ion-col>
+      <ion-col style="align-self: center;">
         <img [src]="userDetails.userAvatar" />
       </ion-col>
-      <ion-col>
+      <ion-col style="align-self: center;">
         <h2>{{ userDetails.totalPostCount }}</h2>
         <ion-note>
           Posts
         </ion-note>
       </ion-col>
-      <ion-col>
+      <ion-col style="align-self: center;">
         <h2>{{ userDetails.totalFollowers }}</h2>
         <ion-note>
           Followers
         </ion-note>
       </ion-col>
-      <ion-col>
+      <ion-col style="align-self: center;">
         <h2>{{ userDetails.totalFollowings }}</h2>
         <ion-note>
           Followings
@@ -24,14 +24,21 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div *ngIf="userDetails.isCurrentUser" class="ion-padding">
-    <ion-button expand="block" type="submit" class="ion-no-margin"
-      >Edit Profile</ion-button
-    >
-  </div>
-  <div *ngIf="!userDetails.isCurrentUser" class="ion-padding">
-    <ion-grid *ngIf="!userDetails.isCurrentUser" style="text-align: center;">
-      <ion-row>
+
+  <div class="ion-padding-sm">
+    <ion-grid style="text-align: center;">
+      <ion-row *ngIf="userDetails.isCurrentUser">
+        <ion-col>
+          <ion-button
+            *ngIf="userDetails.isCurrentUser"
+            expand="block"
+            type="submit"
+            class="ion-no-margin"
+            >Edit Profile</ion-button
+          >
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="!userDetails.isCurrentUser">
         <ion-col
           ><ion-button
             *ngIf="!userDetails.isAlreadyFollowed"
@@ -58,4 +65,18 @@
       </ion-row>
     </ion-grid>
   </div>
+
+  <ion-grid class="ion-padding-sm">
+    <ion-row>
+      <ion-col
+        style="padding: 0;"
+        sizeLg="4"
+        sizeMd="4"
+        sizeXs="4"
+        *ngFor="let userPost of userDetails.allUserPosts"
+      >
+        <img class="img-wrapper" [src]="userPost.contentLink" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
