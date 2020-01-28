@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AppConfig, UrlConfig } from './../../shared/appConfig';
-import { Observable } from 'rxjs';
-import { PostDto } from './../../shared/models/postDto';
-import { PagedResult } from './../../shared/models/pagedResult';
+import { Injectable } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
+import { Observable } from 'rxjs';
+import { UrlConfig } from './../../shared/appConfig';
+import { PagedResult } from './../../shared/models/pagedResult';
+import { PostDto } from './../../shared/models/postDto';
 
 @Injectable()
 export class PostService {
@@ -31,5 +31,17 @@ export class PostService {
   public LikePost(postHashId: string): Observable<PostDto> {
     const url = UrlConfig.POST_LikeDislikePost + '/' + postHashId;
     return this.httpClient.post<PostDto>(url, this.httpOptions);
+  }
+
+  public GetAllOpenPosts(userId: string, pageNo: number, pageSize: number) {
+    const url =
+      UrlConfig.GET_AllOpenPosts +
+      '?userHashId=' +
+      userId +
+      '&pageNo=' +
+      pageNo +
+      '&pageSize=' +
+      pageSize;
+    return this.httpClient.get<PagedResult<PostDto>>(url, this.httpOptions);
   }
 }

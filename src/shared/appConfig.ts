@@ -21,4 +21,5 @@ export const UrlConfig = {
   POST_FollowUser: AppConfig.API_ENDPOINT_PREFIX + 'api/User/FollowUser',
   POST_UnFollowUser: AppConfig.API_ENDPOINT_PREFIX + 'api/User/UnFollowUser',
   GET_UserDetails: AppConfig.API_ENDPOINT_PREFIX + 'api/User/GetUserDetails',
+  GET_AllOpenPosts: AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetAllOpenPosts',
 };

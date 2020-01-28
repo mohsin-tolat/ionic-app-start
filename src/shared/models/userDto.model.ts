@@ -12,4 +12,7 @@ export class UserDto {
   public isCurrentUser: boolean;
   public totalFollowers: number;
   public totalFollowings: number;
+  public userPostPageNo: number;
+  public userPostPageSize: number;
+  public userPostPageCount: number;
 }
