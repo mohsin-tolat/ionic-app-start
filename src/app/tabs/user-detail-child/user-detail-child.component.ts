@@ -18,8 +18,21 @@ import { UserDto } from './../../../shared/models/userDto.model';
   styleUrls: ['./user-detail-child.component.scss'],
 })
 export class UserDetailChildComponent implements OnInit, OnDestroy {
-  @Input()
-  userDetails: UserDto;
+  userDetailsUpdated: UserDto;
+  get userDetails(): UserDto {
+    return this.userDetailsUpdated;
+  }
+
+  @Input('userDetails')
+  set userDetails(value: UserDto) {
+    this.userDetailsUpdated = value;
+    this.allUserPostPagedResult = new PagedResult<PostDto>(
+      this.userDetails.userPostPageNo,
+      this.userDetails.userPostPageSize,
+      this.userDetails.userPostPageCount
+    );
+    this.allUserPosts = this.userDetails.allUserPosts;
+  }
 
   allUserPostPagedResult: PagedResult<PostDto>;
   currentPage: any;
@@ -102,5 +115,6 @@ export class UserDetailChildComponent implements OnInit, OnDestroy {
     this.allUserPostPagedResult = null;
     this.currentPage = 1;
     this.allUserPosts = [];
+    this.userHashIdEmitter.unsubscribe();
   }
 }
