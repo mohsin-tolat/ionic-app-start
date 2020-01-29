@@ -11,3 +11,8 @@ export class PostDto {
   public totalComments: number;
   public uploadedByUserHashId: string;
 }
+
+export class UploadPostDto {
+  public imageContent: string;
+  public description: string;
+}

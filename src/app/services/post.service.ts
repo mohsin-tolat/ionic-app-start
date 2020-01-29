@@ -4,7 +4,7 @@ import { LocalStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
 import { UrlConfig } from './../../shared/appConfig';
 import { PagedResult } from './../../shared/models/pagedResult';
-import { PostDto } from './../../shared/models/postDto';
+import { PostDto, UploadPostDto } from './../../shared/models/postDto';
 
 @Injectable()
 export class PostService {
@@ -48,5 +48,10 @@ export class PostService {
   public GetPostByHashId(postHashId: string): Observable<PostDto> {
     const url = UrlConfig.GET_PostByHashId + '?postHashId=' + postHashId;
     return this.httpClient.get<PostDto>(url, this.httpOptions);
+  }
+
+  public UploadPost(postDetails: UploadPostDto): Observable<boolean> {
+    const url = UrlConfig.POST_UploadPost;
+    return this.httpClient.post<boolean>(url, postDetails, this.httpOptions);
   }
 }

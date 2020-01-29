@@ -7,4 +7,5 @@ export class LoggedInUserModel {
   username: string;
   token: string;
   message: string;
+  userHashId: string;
 }
