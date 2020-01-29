@@ -24,4 +24,5 @@ export const UrlConfig = {
   GET_AllOpenPosts: AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetAllOpenPosts',
   GET_PostByHashId: AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetPostByHashId',
   POST_UploadPost: AppConfig.API_ENDPOINT_PREFIX + 'api/Post/UploadPost',
+  GET_CurrentUserProfile: AppConfig.API_ENDPOINT_PREFIX + 'api/User/GetCurrentUserProfile',
 };

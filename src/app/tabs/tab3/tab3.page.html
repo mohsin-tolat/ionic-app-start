@@ -1,13 +1,22 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      User Name
-    </ion-title>
+<ion-header translucent>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        class="visible-ion-back-button"
+        (click)="this.goBack()"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{this.username}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" name="settings"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen class="ion-padding">
-  <ion-list>
+  <!-- <ion-list>
     <ion-item>
       <ion-icon slot="start" name="logo-ionic"></ion-icon>
       <ion-label>Label with Icon</ion-label>
@@ -15,5 +24,11 @@
   </ion-list>
   <section>
     <ion-button expand="block" (click)="logout()">Logout</ion-button>
-  </section>
+  </section> -->
+  <app-user-detail-child
+    (userHashIdEmitter)="updateUserDetails($event)"
+    *ngIf="userDetailsResponse"
+    [userDetails]="this.userDetailsResponse"
+  >
+  </app-user-detail-child>
 </ion-content>

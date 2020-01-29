@@ -77,6 +77,10 @@ export class Tab2Page implements OnInit {
     );
   }
 
+  removeImage() {
+    this.imageData = '';
+  }
+
   async selectImage() {
     const actionSheet = await this.actionSheetController.create({
       header: 'Select Image source',

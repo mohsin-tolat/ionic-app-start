@@ -18,9 +18,22 @@
           expand="block"
           type="submit"
           class="ion-no-margin"
-          color="warning"
+          color="primary"
           (click)="this.uploadImage()"
-          >Upload</ion-button
+          ><ion-icon name="checkmark"></ion-icon>Upload</ion-button
+        >
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button
+          *ngIf="this.imageData"
+          expand="block"
+          type="submit"
+          class="ion-no-margin"
+          color="danger"
+          (click)="this.removeImage()"
+          ><ion-icon name="trash"></ion-icon> Remove</ion-button
         >
       </ion-col>
     </ion-row>

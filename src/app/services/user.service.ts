@@ -76,4 +76,10 @@ export class UserService {
 
     return this.httpClient.get<UserDto>(url, this.httpOptions);
   }
+
+  getCurrentUserprofile(): Observable<UserDto> {
+    const url = UrlConfig.GET_CurrentUserProfile;
+
+    return this.httpClient.get<UserDto>(url, this.httpOptions);
+  }
 }

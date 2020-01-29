@@ -1,6 +1,8 @@
+import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { LocalStorageService } from 'ngx-webstorage';
+import { UserService } from 'src/app/services/user.service';
+import { UserDto } from 'src/shared/models/userDto.model';
 
 @Component({
   selector: 'app-tab3',
@@ -8,13 +10,42 @@ import { LocalStorageService } from 'ngx-webstorage';
   styleUrls: ['tab3.page.scss'],
 })
 export class Tab3Page {
+  username: any;
+  userHashId: any;
+  userDetailsResponse: UserDto;
+
   constructor(
-    private router: Router,
-    private localStorageService: LocalStorageService
+    private userService: UserService,
+    private localStorageService: LocalStorageService,
+    private location: Location
   ) {}
 
-  logout() {
-    this.localStorageService.clear();
-    this.router.navigateByUrl('/');
+  public updateUserDetails(userHashId: string) {
+    this.getCurrentUserprofile();
   }
+
+  ionViewWillEnter() {
+    this.username = this.localStorageService.retrieve('currentUserName');
+    this.getCurrentUserprofile();
+  }
+
+  getCurrentUserprofile() {
+    this.userService.getCurrentUserprofile().subscribe(
+      result => {
+        this.userDetailsResponse = result;
+      },
+      error => {
+        console.error('Error Occurred while Getting User Details', error);
+      }
+    );
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  // logout() {
+  //   this.localStorageService.clear();
+  //   this.router.navigateByUrl('/');
+  // }
 }
