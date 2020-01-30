@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from 'ngx-webstorage';
 import { Observable } from 'rxjs';
 import { UrlConfig } from './../../shared/appConfig';
 import { PagedResult } from './../../shared/models/pagedResult';
@@ -14,10 +13,7 @@ export class PostService {
     }),
   };
 
-  constructor(
-    private httpClient: HttpClient,
-    private localStorageService: LocalStorageService
-  ) {}
+  constructor(private httpClient: HttpClient) {}
 
   public GetAllNewPosts(
     pageNo: number,
@@ -53,5 +49,11 @@ export class PostService {
   public UploadPost(postDetails: UploadPostDto): Observable<boolean> {
     const url = UrlConfig.POST_UploadPost;
     return this.httpClient.post<boolean>(url, postDetails, this.httpOptions);
+  }
+
+  public DeletePostByHashId(postHashId: string): Observable<boolean> {
+    const url =
+      UrlConfig.DELETE_PostFromDatabaseAndStorage + '?postHashId=' + postHashId;
+    return this.httpClient.delete<boolean>(url, this.httpOptions);
   }
 }

@@ -18,6 +18,12 @@
         <ion-label class="ion-padding">{{ post.uploadedByUserName }}</ion-label>
       </a>
     </ion-label>
+
+    <ion-buttons slot="end" *ngIf="this.post.isCurrentUserUploadedPost">
+      <ion-button (click)="this.presentDeleteConfirm()">
+        <ion-icon slot="icon-only" name="trash" color="danger"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-item>
 
   <img [src]="post.contentLink" />

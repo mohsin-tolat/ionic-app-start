@@ -10,6 +10,7 @@ export class PostDto {
   public uploadedUserAvatar: string;
   public totalComments: number;
   public uploadedByUserHashId: string;
+  public isCurrentUserUploadedPost: boolean;
 }
 
 export class UploadPostDto {
