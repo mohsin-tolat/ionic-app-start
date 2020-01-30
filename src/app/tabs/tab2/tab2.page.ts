@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Camera } from '@ionic-native/Camera/ngx';
-import { File } from '@ionic-native/file/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, MenuController } from '@ionic/angular';
 import { PostService } from 'src/app/services/post.service';
 import { ToastService } from 'src/app/services/toast.service';
 import { UploadPostDto } from 'src/shared/models/postDto';
@@ -21,8 +20,8 @@ export class Tab2Page implements OnInit {
     public postService: PostService,
     private camera: Camera,
     public actionSheetController: ActionSheetController,
-    private file: File,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private menuController: MenuController
   ) {}
 
   ngOnInit(): void {}
@@ -49,6 +48,10 @@ export class Tab2Page implements OnInit {
           console.error(err);
         }
       );
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false, 'first');
   }
 
   uploadImage() {

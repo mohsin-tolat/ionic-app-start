@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { PagedResult } from './../../../shared/models/pagedResult';
 import { PostDto } from './../../../shared/models/postDto';
 import { PostService } from './../../services/post.service';
@@ -9,7 +10,10 @@ import { PostService } from './../../services/post.service';
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page implements OnInit, OnDestroy {
-  constructor(private postService: PostService) {}
+  constructor(
+    private postService: PostService,
+    private menuController: MenuController
+  ) {}
   pagedResult: PagedResult<PostDto>;
   allNewPosts: PostDto[] = [];
   currentPage: number;
@@ -17,6 +21,10 @@ export class Tab1Page implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.currentPage = 1;
     this.getNewPosts(this.currentPage, 10);
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false, 'first');
   }
 
   loadData(event) {

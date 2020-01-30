@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MenuController } from '@ionic/angular';
 import { PagedResult } from './../../../shared/models/pagedResult';
 import { UserDto } from './../../../shared/models/userDto.model';
 import { UserService } from './../../services/user.service';
@@ -14,7 +15,10 @@ export class SearchTabPage implements OnInit, OnDestroy {
   currentPage: any;
   allNewUser: UserDto[];
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private menuController: MenuController
+  ) {}
 
   ngOnInit() {
     this.currentPage = 1;
@@ -40,6 +44,10 @@ export class SearchTabPage implements OnInit, OnDestroy {
       this.allUserBasedOnSearchPagedResult = new PagedResult<UserDto>(1, 10);
       this.appendNewUserBasedOnSearch(false, 1, 10);
     }
+  }
+
+  ionViewWillEnter() {
+    this.menuController.enable(false, 'first');
   }
 
   appendNewUserBasedOnSearch(

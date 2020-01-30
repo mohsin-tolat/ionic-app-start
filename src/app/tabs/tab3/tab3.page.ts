@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { LocalStorageService } from 'ngx-webstorage';
 import { UserService } from 'src/app/services/user.service';
 import { UserDto } from 'src/shared/models/userDto.model';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -17,7 +18,8 @@ export class Tab3Page {
   constructor(
     private userService: UserService,
     private localStorageService: LocalStorageService,
-    private location: Location
+    private location: Location,
+    private menuController: MenuController
   ) {}
 
   public updateUserDetails(userHashId: string) {
@@ -26,6 +28,7 @@ export class Tab3Page {
 
   ionViewWillEnter() {
     this.username = this.localStorageService.retrieve('currentUserName');
+    this.menuController.enable(true, 'first');
     this.getCurrentUserprofile();
   }
 
@@ -44,8 +47,7 @@ export class Tab3Page {
     this.location.back();
   }
 
-  // logout() {
-  //   this.localStorageService.clear();
-  //   this.router.navigateByUrl('/');
-  // }
+  openMenu() {
+    this.menuController.toggle('first');
+  }
 }
