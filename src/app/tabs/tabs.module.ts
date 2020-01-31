@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Camera } from '@ionic-native/Camera/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { IonicModule } from '@ionic/angular';
 import { TimeagoModule } from 'ngx-timeago';
 import { PostService } from '../services/post.service';
+import { TabsService } from '../services/tabs.service';
 import { SharedModule } from './../../shared/shared.module';
 import { PhotoCardComponent } from './photo-card/photo-card.component';
 import { PostDetailPage } from './post-detail/post-detail.page';
@@ -16,8 +19,6 @@ import { TabsPage } from './tabs.page';
 import { UserDetailChildComponent } from './user-detail-child/user-detail-child.component';
 import { UserDetailPage } from './user-detail/user-detail.page';
 import { UserListComponent } from './user-list/user-list.component';
-import { Camera } from '@ionic-native/Camera/ngx';
-import { File } from '@ionic-native/file/ngx';
 
 // class CameraMock extends Camera {
 // { provide: Camera, useClass: CameraMock }
@@ -49,6 +50,6 @@ import { File } from '@ionic-native/file/ngx';
     UserDetailChildComponent,
     PostDetailPage,
   ],
-  providers: [PostService, Camera, File],
+  providers: [PostService, Camera, File, TabsService],
 })
 export class TabsPageModule {}

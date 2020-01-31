@@ -11,6 +11,7 @@ import { UserService } from './../../../app/services/user.service';
 import { PagedResult } from './../../../shared/models/pagedResult';
 import { PostDto } from './../../../shared/models/postDto';
 import { UserDto } from './../../../shared/models/userDto.model';
+import { AppConfig } from 'src/shared/appConfig';
 
 @Component({
   selector: 'app-user-detail-child',
@@ -58,10 +59,10 @@ export class UserDetailChildComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.currentPage = this.allUserPostPagedResult.currentPage + 1;
       if (this.currentPage <= this.allUserPostPagedResult.pageCount) {
-        this.appendNewUserBasedOnSearch(
+        this.appendNewPosts(
           this.userDetails.userHashId,
           this.currentPage,
-          15
+          AppConfig.Setting.POST_PAGE_SIZE_FOR_USER_PROFILE
         );
         event.target.complete();
       } else {
@@ -70,7 +71,7 @@ export class UserDetailChildComponent implements OnInit, OnDestroy {
     }, 500);
   }
 
-  appendNewUserBasedOnSearch(userId: string, pageNo: number, pageSize: number) {
+  appendNewPosts(userId: string, pageNo: number, pageSize: number) {
     this.postService.GetAllOpenPosts(userId, pageNo, pageSize).subscribe(
       result => {
         if (result) {

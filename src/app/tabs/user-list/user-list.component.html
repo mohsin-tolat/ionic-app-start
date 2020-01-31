@@ -13,10 +13,18 @@
         userName: userDetails.username
       }"
     >
-      <ion-label class="ion-padding">{{ userDetails.username }}</ion-label>
+      <ion-label>
+        <h3>{{ userDetails.username }}</h3>
+        <p>
+          {{ userDetails.firstName }} {{ userDetails.lastName }}
+          <ng-container *ngIf="userDetails.isAlreadyFollowed">
+            - Following
+          </ng-container>
+        </p>
+      </ion-label>
     </a>
   </ion-label>
-  <ion-button
+  <!-- <ion-button
     (click)="followUser(userDetails.userHashId)"
     *ngIf="!userDetails.isAlreadyFollowed"
     color="primary"
@@ -26,5 +34,5 @@
   <ion-chip *ngIf="isUserFollowSuccess" outline color="primary">
     <ion-label>Followed</ion-label>
     <ion-icon name="checkmark"></ion-icon>
-  </ion-chip>
+  </ion-chip> -->
 </ion-item>

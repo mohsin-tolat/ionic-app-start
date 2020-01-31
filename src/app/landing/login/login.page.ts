@@ -5,12 +5,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 import { LocalStorageService } from 'ngx-webstorage';
+import { TabsService } from 'src/app/services/tabs.service';
 import { LoadingService } from './../../../app/services/loading.service';
 import { ToastService } from './../../../app/services/toast.service';
 import { UserService } from './../../../app/services/user.service';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +25,7 @@ export class LoginPage implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private toastService: ToastService,
-    private router: Router,
+    private tabsService: TabsService,
     private userService: UserService,
     private localStorageService: LocalStorageService,
     private loadingService: LoadingService,
@@ -47,6 +47,7 @@ export class LoginPage implements OnInit, OnDestroy {
   }
 
   checkLogin() {
+    this.tabsService.logout(true);
     this.userService.Login(this.loginForm.value).subscribe(
       result => {
         if (result && result.token) {

@@ -15,6 +15,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
   <app-photo-card
     [post]="post"
     *ngFor="let post of allNewPosts"
@@ -22,7 +30,7 @@
 
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
     <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
+      loadingSpinner="crescent"
       loadingText="Loading more data..."
     >
     </ion-infinite-scroll-content>

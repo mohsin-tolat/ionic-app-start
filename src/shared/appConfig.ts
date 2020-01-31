@@ -6,6 +6,11 @@ export const AppConfig = {
   Environment_Config: {
     Production: environment.production,
   },
+  Setting: {
+    USER_PAGE_SIZE_FOR_LIST: 10,
+    POST_PAGE_SIZE_FOR_DASHBOARD: 10,
+    POST_PAGE_SIZE_FOR_USER_PROFILE: 15,
+  },
 };
 
 export const UrlConfig = {

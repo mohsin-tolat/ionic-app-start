@@ -4,6 +4,7 @@ export class UserDto {
   public userHashId: string;
   public username: number;
   public firstName: string;
+  public lastName: string;
   public emailAdress: boolean;
   public userAvatar: string;
   public isAlreadyFollowed: boolean;

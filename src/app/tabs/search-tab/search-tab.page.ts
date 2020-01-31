@@ -3,6 +3,7 @@ import { MenuController } from '@ionic/angular';
 import { PagedResult } from './../../../shared/models/pagedResult';
 import { UserDto } from './../../../shared/models/userDto.model';
 import { UserService } from './../../services/user.service';
+import { AppConfig } from 'src/shared/appConfig';
 
 @Component({
   selector: 'app-search-tab',
@@ -28,7 +29,7 @@ export class SearchTabPage implements OnInit, OnDestroy {
     setTimeout(() => {
       this.currentPage = this.allUserBasedOnSearchPagedResult.currentPage + 1;
       if (this.currentPage <= this.allUserBasedOnSearchPagedResult.pageCount) {
-        this.appendNewUserBasedOnSearch(true, this.currentPage, 10);
+        this.appendNewUserBasedOnSearch(true, this.currentPage, AppConfig.Setting.USER_PAGE_SIZE_FOR_LIST);
         event.target.complete();
       } else {
         event.target.complete();
@@ -41,8 +42,8 @@ export class SearchTabPage implements OnInit, OnDestroy {
     if (!this.searchText || this.searchText.length <= 3) {
       return;
     } else {
-      this.allUserBasedOnSearchPagedResult = new PagedResult<UserDto>(1, 10);
-      this.appendNewUserBasedOnSearch(false, 1, 10);
+      this.allUserBasedOnSearchPagedResult = new PagedResult<UserDto>(1, AppConfig.Setting.USER_PAGE_SIZE_FOR_LIST);
+      this.appendNewUserBasedOnSearch(false, 1, AppConfig.Setting.USER_PAGE_SIZE_FOR_LIST);
     }
   }
 

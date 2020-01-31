@@ -48,6 +48,7 @@ export class Tab3Page {
   }
 
   openMenu() {
-    this.menuController.toggle('first');
+    this.menuController.enable(true, 'first');
+    this.menuController.open('first');
   }
 }
