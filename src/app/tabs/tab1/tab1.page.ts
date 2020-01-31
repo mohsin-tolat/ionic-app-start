@@ -91,12 +91,7 @@ export class Tab1Page implements OnInit, OnDestroy {
         if (result) {
           this.pagedResult = result;
           for (const item of this.pagedResult.results) {
-            const found = this.allNewPosts.some(
-              el => el.postHashId === item.postHashId
-            );
-            if (!found) {
-              this.allNewPosts.push(item);
-            }
+            this.allNewPosts.push(item);
           }
         }
       },
