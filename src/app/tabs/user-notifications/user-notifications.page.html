@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Activity</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-list>
+    <ion-item *ngFor="let activity of allNewActivities">
+      <ion-avatar slot="start">
+        <a
+          [routerLink]="['/tabs/userDetails']"
+          routerLinkActive="router-link-active"
+          router-direction="forward"
+          class="user-clickable-link"
+          [queryParams]="{
+        userHashId: activity.activityDoneByUser.userHashId,
+        userName: activity.activityDoneByUser.username
+      }"
+        >
+          <img [src]="activity.activityDoneByUser.userAvatar" />
+        </a>
+      </ion-avatar>
+
+      <ion-label class="ion-text-wrap" *ngIf="activity.isLike">
+        <a
+          [routerLink]="['/tabs/userDetails']"
+          routerLinkActive="router-link-active"
+          router-direction="forward"
+          class="user-clickable-link"
+          [queryParams]="{
+        userHashId: activity.activityDoneByUser.userHashId,
+        userName: activity.activityDoneByUser.username
+      }"
+        >
+          {{activity.activityDoneByUser.username}}
+        </a>
+        liked your photo.
+        <p>
+          {{ activity.activityDoneOn | timeago }}
+        </p>
+      </ion-label>
+      <ion-label class="ion-text-wrap" *ngIf="activity.isComment">
+        {{activity.activityDoneByUser.username}} commented your photo.
+        <ion-note> {{ activity.activityDoneOn | timeago }}</ion-note>
+      </ion-label>
+      <ion-avatar slot="end">
+        <a
+          [routerLink]="['/tabs/postDetails']"
+          routerLinkActive="router-link-active"
+          router-direction="forward"
+          class="user-clickable-link"
+          [queryParams]="{
+            postHashId: activity.post.postHashId
+          }"
+        >
+          <img [src]="activity.post.contentLink" />
+        </a>
+      </ion-avatar>
+    </ion-item>
+  </ion-list>
+</ion-content>

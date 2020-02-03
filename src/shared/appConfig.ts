@@ -10,6 +10,7 @@ export const AppConfig = {
     USER_PAGE_SIZE_FOR_LIST: 10,
     POST_PAGE_SIZE_FOR_DASHBOARD: 10,
     POST_PAGE_SIZE_FOR_USER_PROFILE: 15,
+    ACTIVITIES_PAGE_SIZE: 100,
   },
 };
 
@@ -33,4 +34,6 @@ export const UrlConfig = {
     AppConfig.API_ENDPOINT_PREFIX + 'api/User/GetCurrentUserProfile',
   DELETE_PostFromDatabaseAndStorage:
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/DeletePostByHashId',
+  GET_CurrentUserPostsActivities:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetCurrentUserPostsActivities',
 };

@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { ActivityDto } from 'src/shared/models/activityDto.model';
 import { UrlConfig } from './../../shared/appConfig';
 import { PagedResult } from './../../shared/models/pagedResult';
 import { PostDto, UploadPostDto } from './../../shared/models/postDto';
@@ -55,5 +56,18 @@ export class PostService {
     const url =
       UrlConfig.DELETE_PostFromDatabaseAndStorage + '?postHashId=' + postHashId;
     return this.httpClient.delete<boolean>(url, this.httpOptions);
+  }
+
+  public GetCurrentUserPostsActivities(
+    pageNo: number,
+    pageSize: number
+  ): Observable<PagedResult<ActivityDto>> {
+    const url =
+      UrlConfig.GET_CurrentUserPostsActivities +
+      '?pageNo=' +
+      pageNo +
+      '&pageSize=' +
+      pageSize;
+    return this.httpClient.get<PagedResult<ActivityDto>>(url, this.httpOptions);
   }
 }
