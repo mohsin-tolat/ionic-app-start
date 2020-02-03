@@ -23,6 +23,20 @@
     >
     </ion-refresher-content>
   </ion-refresher>
+
+  <ion-card *ngIf="this.isNewUser">
+    <img src="./../../../assets/images/welcome.png" />
+    <ion-card-header>
+      <ion-card-title>Welcome {{this.currentUserName}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      Hello, Welcome to InstantGram, Please Click on
+      <ion-icon name="search"></ion-icon> Icon and search your friend, or click
+      on <ion-icon name="add-circle-outline"></ion-icon> to upload your first
+      post.
+    </ion-card-content>
+  </ion-card>
+
   <app-photo-card
     [post]="post"
     *ngFor="let post of allNewPosts"

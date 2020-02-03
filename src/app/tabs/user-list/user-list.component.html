@@ -17,7 +17,9 @@
         <h3>{{ userDetails.username }}</h3>
         <p>
           {{ userDetails.firstName }} {{ userDetails.lastName }}
-          <ng-container *ngIf="userDetails.isAlreadyFollowed">
+          <ng-container
+            *ngIf="userDetails.isAlreadyFollowed && !userDetails.isCurrentUser"
+          >
             - Following
           </ng-container>
         </p>

@@ -6,6 +6,7 @@ import { AppConfig } from 'src/shared/appConfig';
 import { PagedResult } from './../../../shared/models/pagedResult';
 import { PostDto } from './../../../shared/models/postDto';
 import { PostService } from './../../services/post.service';
+import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-tab1',
@@ -16,7 +17,8 @@ export class Tab1Page implements OnInit, OnDestroy {
   constructor(
     private postService: PostService,
     private menuController: MenuController,
-    private tabsService: TabsService
+    private tabsService: TabsService,
+    private localStorageService: LocalStorageService
   ) {}
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -26,6 +28,8 @@ export class Tab1Page implements OnInit, OnDestroy {
   currentPage: number;
   tabDataSubscription: Subscription[] = [];
   isFromScrollToTop = false;
+  isNewUser = false;
+  currentUserName = '';
 
   ngOnInit(): void {
     this.currentPage = 1;
@@ -49,6 +53,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   ionViewWillEnter() {
+    this.currentUserName = this.localStorageService.retrieve('currentUserName');
     this.menuController.enable(false, 'first');
     this.handleLogout();
     this.handleScrollToTopWhenDoubleTab();
@@ -95,11 +100,13 @@ export class Tab1Page implements OnInit, OnDestroy {
   getNewPosts(pageNo: number, pageSize: number) {
     this.postService.GetAllNewPosts(pageNo, pageSize).subscribe(
       result => {
-        if (result) {
+        if (result && result.results && result.results.length > 0) {
           this.pagedResult = result;
           for (const item of this.pagedResult.results) {
             this.allNewPosts.push(item);
           }
+        } else {
+          this.isNewUser = true;
         }
       },
       error => {
