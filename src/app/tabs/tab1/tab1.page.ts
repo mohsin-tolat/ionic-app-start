@@ -25,6 +25,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   allNewPosts: PostDto[] = [];
   currentPage: number;
   tabDataSubscription: Subscription[] = [];
+  isFromScrollToTop = false;
 
   ngOnInit(): void {
     this.currentPage = 1;
@@ -65,24 +66,30 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   ionViewDidLeave() {
+    this.isFromScrollToTop = false;
     this.tabDataSubscription.forEach(element => {
       element.unsubscribe();
     });
   }
 
   loadData(event) {
-    setTimeout(() => {
-      this.currentPage = this.pagedResult.currentPage + 1;
-      if (this.currentPage <= this.pagedResult.pageCount) {
-        this.getNewPosts(
-          this.currentPage,
-          AppConfig.Setting.POST_PAGE_SIZE_FOR_DASHBOARD
-        );
-        event.target.complete();
-      } else {
-        event.target.complete();
-      }
-    }, 500);
+    if (this.isFromScrollToTop) {
+      this.isFromScrollToTop = false;
+      event.target.complete();
+    } else {
+      setTimeout(() => {
+        this.currentPage = this.pagedResult.currentPage + 1;
+        if (this.currentPage <= this.pagedResult.pageCount) {
+          this.getNewPosts(
+            this.currentPage,
+            AppConfig.Setting.POST_PAGE_SIZE_FOR_DASHBOARD
+          );
+          event.target.complete();
+        } else {
+          event.target.complete();
+        }
+      }, 500);
+    }
   }
 
   getNewPosts(pageNo: number, pageSize: number) {
@@ -114,6 +121,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   }
 
   scrollToTopAndRefreshData() {
+    this.isFromScrollToTop = true;
     this.content.scrollToTop(1000);
     this.allNewPosts = [];
     this.currentPage = 1;
