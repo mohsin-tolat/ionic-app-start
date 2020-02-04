@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button
+        class="visible-ion-back-button"
+        (click)="this.goBack()"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Comments</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let comment of allComments">
+      <ion-avatar slot="start">
+        <a
+          [routerLink]="['/tabs/userDetails']"
+          routerLinkActive="router-link-active"
+          router-direction="forward"
+          class="user-clickable-link"
+          [queryParams]="{
+        userHashId: activity.activityDoneByUser.userHashId,
+        userName: activity.activityDoneByUser.username
+      }"
+        >
+          <img [src]="comment.commentedBy.userAvatar" />
+          {{comment.commentedBy.username}}
+        </a>
+      </ion-avatar>
+
+      <ion-label class="ion-text-wrap">
+        {{comment.content}}
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img [src]="" />
+      </ion-avatar>
+      <ion-item>
+        <ion-input type="password" placeholder="Password"></ion-input>
+        <ion-button fill="clear" slot="end">
+          Post
+        </ion-button>
+      </ion-item>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

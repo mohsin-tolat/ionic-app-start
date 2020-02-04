@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivityDto } from 'src/shared/models/activityDto.model';
+import { CommentDto } from 'src/shared/models/commentDto.model';
 import { UrlConfig } from './../../shared/appConfig';
 import { PagedResult } from './../../shared/models/pagedResult';
 import { PostDto, UploadPostDto } from './../../shared/models/postDto';
@@ -69,5 +70,19 @@ export class PostService {
       '&pageSize=' +
       pageSize;
     return this.httpClient.get<PagedResult<ActivityDto>>(url, this.httpOptions);
+  }
+
+  public GetPostComments(
+    postHashId: string,
+    pageNo: number,
+    pageSize: number
+  ): Observable<PagedResult<CommentDto>> {
+    const url =
+      UrlConfig.GET_CurrentUserPostsActivities +
+      '?pageNo=' +
+      pageNo +
+      '&pageSize=' +
+      pageSize;
+    return this.httpClient.get<PagedResult<CommentDto>>(url, this.httpOptions);
   }
 }

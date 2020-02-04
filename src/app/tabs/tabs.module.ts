@@ -9,6 +9,7 @@ import { PostService } from '../services/post.service';
 import { TabsService } from '../services/tabs.service';
 import { SharedModule } from './../../shared/shared.module';
 import { PhotoCardComponent } from './photo-card/photo-card.component';
+import { PostCommentsPage } from './post-comments/post-comments.page';
 import { PostDetailPage } from './post-detail/post-detail.page';
 import { SearchTabPage } from './search-tab/search-tab.page';
 import { Tab1Page } from './tab1/tab1.page';
@@ -51,6 +52,7 @@ import { UserNotificationsPage } from './user-notifications/user-notifications.p
     UserDetailChildComponent,
     PostDetailPage,
     UserNotificationsPage,
+    PostCommentsPage,
   ],
   providers: [PostService, Camera, File, TabsService],
 })
