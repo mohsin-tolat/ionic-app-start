@@ -45,12 +45,12 @@
         </a>
         liked your photo.
         <p>
-          {{ activity.activityDoneOn | timeago }}
+          {{ activity.activityDoneOn | amLocal | amTimeAgo }}
         </p>
       </ion-label>
       <ion-label class="ion-text-wrap" *ngIf="activity.isComment">
         {{activity.activityDoneByUser.username}} commented your photo.
-        <ion-note> {{ activity.activityDoneOn | timeago }}</ion-note>
+        <ion-note> {{ activity.activityDoneOn | amLocal | amTimeAgo }}</ion-note>
       </ion-label>
       <ion-avatar slot="end">
         <a

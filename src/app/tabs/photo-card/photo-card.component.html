@@ -56,6 +56,6 @@
     <ion-note>View All {{ post.totalComments }} Comments</ion-note>
   </ion-item>
   <ion-item *ngIf="post.uploadOn" lines="none">
-    <ion-note>{{ post.uploadOn | timeago }}</ion-note>
+    <ion-note>{{ post.uploadOn | amLocal | amTimeAgo }}</ion-note>
   </ion-item>
 </ion-card>

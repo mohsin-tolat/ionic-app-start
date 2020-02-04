@@ -28,7 +28,7 @@ export class Tab1Page implements OnInit, OnDestroy {
   currentPage: number;
   tabDataSubscription: Subscription[] = [];
   isFromScrollToTop = false;
-  isNewUser = false;
+  // isNewUser = false;
   currentUserName = '';
 
   ngOnInit(): void {
@@ -105,9 +105,10 @@ export class Tab1Page implements OnInit, OnDestroy {
           for (const item of this.pagedResult.results) {
             this.allNewPosts.push(item);
           }
-        } else {
-          this.isNewUser = true;
         }
+        // else {
+        //   this.isNewUser = true;
+        // }
       },
       error => {
         console.error('Error occurred while getting new posts.');

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MomentModule } from 'ngx-moment';
 import { TabsService } from 'src/app/services/tabs.service';
 import { LoadingService } from './../app/services/loading.service';
 import { PostService } from './../app/services/post.service';
@@ -9,14 +10,15 @@ import { AuthGuard } from './guards/auth-guard.service';
 
 @NgModule({
   declarations: [],
-  imports: [CommonModule],
+  imports: [CommonModule, MomentModule],
   providers: [
     LoadingService,
     ToastService,
     PostService,
     UserService,
     AuthGuard,
-    TabsService
+    TabsService,
   ],
+  exports: [MomentModule],
 })
 export class SharedModule {}
