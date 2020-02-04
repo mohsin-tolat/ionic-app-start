@@ -1,9 +1,14 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { LocalStorageService } from 'ngx-webstorage';
 import { PostService } from 'src/app/services/post.service';
 import { AppConfig } from 'src/shared/appConfig';
-import { CommentDto } from 'src/shared/models/commentDto.model';
+import {
+  CommentDto,
+  UpdateCommentModel,
+} from 'src/shared/models/commentDto.model';
 import { PagedResult } from 'src/shared/models/pagedResult';
 
 @Component({
@@ -16,15 +21,28 @@ export class PostCommentsPage implements OnInit {
   allComments: CommentDto[];
   currentPage: any;
   allPostBasedCommentsPagedResult: PagedResult<CommentDto>;
+  currentUserAvatar = '';
+  userComment = '';
+
+  public get isValidComment(): boolean {
+    return this.userComment && this.userComment.trim() ? true : false;
+  }
+
   constructor(
     private route: ActivatedRoute,
     private postService: PostService,
-    private location: Location
+    private location: Location,
+    private localStorageService: LocalStorageService,
+    private alertController: AlertController
   ) {
     this.route.queryParams.subscribe(params => {
       this.postHashId = params.postHashId;
       this.getPostComments();
     });
+
+    this.currentUserAvatar = this.localStorageService.retrieve(
+      'userAvatarLink'
+    );
   }
 
   getPostComments() {
@@ -46,7 +64,7 @@ export class PostCommentsPage implements OnInit {
       this.appendNewCommentsBasedOnPostHahId(
         false,
         this.currentPage,
-        AppConfig.Setting.POST_PAGE_SIZE_FOR_DASHBOARD
+        AppConfig.Setting.COMMENTS_PAGE_SIZE
       );
       event.target.complete();
     }, 2000);
@@ -95,6 +113,74 @@ export class PostCommentsPage implements OnInit {
   }
 
   ngOnInit() {}
+
+  addComment() {
+    const comment = new UpdateCommentModel();
+    comment.content = this.userComment.trim();
+    comment.postHashId = this.postHashId;
+    this.postService.AddComment(comment).subscribe(
+      result => {
+        this.userComment = '';
+
+        if (result) {
+          this.currentPage = 1;
+          this.allComments = [];
+          this.appendNewCommentsBasedOnPostHahId(
+            false,
+            this.currentPage,
+            AppConfig.Setting.COMMENTS_PAGE_SIZE
+          );
+        }
+      },
+      error => {
+        console.log('Error Occurred while Adding comment on the post');
+      }
+    );
+  }
+
+  deleteComment(postCommentHashId: string) {
+    this.postService.DeletePostComment(postCommentHashId).subscribe(
+      result => {
+        this.userComment = '';
+
+        if (result) {
+          this.currentPage = 1;
+          this.allComments = [];
+          this.appendNewCommentsBasedOnPostHahId(
+            false,
+            this.currentPage,
+            AppConfig.Setting.COMMENTS_PAGE_SIZE
+          );
+        }
+      },
+      error => {
+        console.log('Error Occurred while Deleting comment on the post');
+      }
+    );
+  }
+
+  async presentDeleteConfirm(postHashId: string) {
+    const alert = await this.alertController.create({
+      header: 'Confirm!',
+      message: 'Are you sure you want to delete this Comment.?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: blah => {},
+        },
+        {
+          text: 'Okay',
+          handler: () => {
+            this.deleteComment(postHashId);
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
 
   goBack() {
     this.location.back();

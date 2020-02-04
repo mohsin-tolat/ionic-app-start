@@ -46,6 +46,14 @@
       *ngIf="post.isCurrentUserLikedPost"
       ><ion-icon size="large" name="heart" color="danger"></ion-icon
     ></ion-buttons>
+    &nbsp;
+    <ion-buttons
+      size="large"
+      color="light"
+      fill="none"
+      (click)="this.onCommentButtonClick(post.postHashId)"
+      ><ion-icon size="large" name="paper-plane"></ion-icon
+    ></ion-buttons>
   </ion-item>
 
   <ion-item lines="none">
@@ -53,7 +61,16 @@
   </ion-item>
 
   <ion-item *ngIf="post.totalComments > 0" lines="none">
-    <ion-note> - View All Comments</ion-note>
+    <ion-note>
+      <ion-buttons
+        size="large"
+        color="light"
+        fill="none"
+        (click)="this.onCommentButtonClick(post.postHashId)"
+      >
+        View All Comments
+      </ion-buttons>
+    </ion-note>
   </ion-item>
   <ion-item *ngIf="post.uploadOn" lines="none">
     <ion-note>{{ post.uploadOn | amLocal | amTimeAgo }}</ion-note>

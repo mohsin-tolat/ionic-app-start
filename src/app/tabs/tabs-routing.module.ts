@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PostCommentsPage } from './post-comments/post-comments.page';
 import { PostDetailPage } from './post-detail/post-detail.page';
 import { SearchTabPage } from './search-tab/search-tab.page';
 import { Tab1Page } from './tab1/tab1.page';
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'userNotifications',
         component: UserNotificationsPage,
+      },
+      {
+        path: 'postComments',
+        component: PostCommentsPage,
       },
     ],
   },

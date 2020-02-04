@@ -11,6 +11,14 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="Pull to refresh"
+      refreshingSpinner="crescent"
+    >
+    </ion-refresher-content>
+  </ion-refresher>
   <ion-list>
     <ion-item *ngFor="let comment of allComments">
       <ion-avatar slot="start">
@@ -20,34 +28,101 @@
           router-direction="forward"
           class="user-clickable-link"
           [queryParams]="{
-        userHashId: activity.activityDoneByUser.userHashId,
-        userName: activity.activityDoneByUser.username
+        userHashId: comment.commentedBy.userHashId,
+        userName: comment.commentedBy.username
       }"
         >
           <img [src]="comment.commentedBy.userAvatar" />
-          {{comment.commentedBy.username}}
         </a>
       </ion-avatar>
-
       <ion-label class="ion-text-wrap">
-        {{comment.content}}
+        <p>
+          <a
+            [routerLink]="['/tabs/userDetails']"
+            routerLinkActive="router-link-active"
+            router-direction="forward"
+            class="user-clickable-link-Dark"
+            [queryParams]="{
+              userHashId: comment.commentedBy.userHashId,
+              userName: comment.commentedBy.username
+            }"
+          >
+            {{comment.commentedBy.username}}
+          </a>
+          {{comment.content}}
+        </p>
+        <p>
+          {{comment.commentedOn | amLocal | amTimeAgo:true}}
+          <ng-template *ngIf="comment.totalCommentLikes>0">
+            {{comment.totalCommentLikes}} Likes</ng-template
+          >
+          <!-- <ion-button
+            *ngIf="comment.isCurrentUserComment"
+            (click)="this.deleteComment(comment.commentHashId)"
+            fill="clear"
+          >
+            Delete
+          </ion-button> -->
+          <a
+            *ngIf="comment.isCurrentUserComment"
+            (click)="this.presentDeleteConfirm(comment.commentHashId)"
+            class="user-clickable-link-Dark"
+          >
+            Delete
+          </a>
+        </p>
       </ion-label>
+      <ion-button
+        size="small"
+        fill="clear"
+        color="dark"
+        *ngIf="!this.comment.isCurrentUserLikeComment"
+      >
+        <ion-icon slot="end" slot="icon-only" name="heart-empty"></ion-icon>
+      </ion-button>
+      <ion-button
+        size="small"
+        fill="clear"
+        *ngIf="this.comment.isCurrentUserLikeComment"
+      >
+        <ion-icon
+          slot="end"
+          slot="icon-only"
+          name="heart"
+          color="danger"
+        ></ion-icon>
+      </ion-button>
     </ion-item>
   </ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="crescent"
+      loadingText="Loading more data..."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-item>
       <ion-avatar slot="start">
-        <img [src]="" />
+        <img [src]="this.currentUserAvatar" />
       </ion-avatar>
-      <ion-item>
-        <ion-input type="password" placeholder="Password"></ion-input>
-        <ion-button fill="clear" slot="end">
-          Post
-        </ion-button>
-      </ion-item>
+
+      <ion-input
+        [(ngModel)]="userComment"
+        type="text"
+        placeholder="Add comment..."
+      ></ion-input>
+      <ion-button
+        (click)="this.addComment()"
+        [disabled]="!isValidComment"
+        fill="clear"
+        slot="end"
+      >
+        Post
+      </ion-button>
     </ion-item>
   </ion-toolbar>
 </ion-footer>

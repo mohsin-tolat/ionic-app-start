@@ -11,7 +11,7 @@ export const AppConfig = {
     POST_PAGE_SIZE_FOR_DASHBOARD: 10,
     POST_PAGE_SIZE_FOR_USER_PROFILE: 15,
     ACTIVITIES_PAGE_SIZE: 100,
-    COMMENTS_PAGE_SIZE: 50,
+    COMMENTS_PAGE_SIZE: 10,
   },
 };
 
@@ -37,4 +37,10 @@ export const UrlConfig = {
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/DeletePostByHashId',
   GET_CurrentUserPostsActivities:
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetCurrentUserPostsActivities',
+  GET_PostCommentsByPostHashId:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/GetPostCommentsByPostHashId',
+  POST_AddNewCommentForPost:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/AddNewCommentForPost',
+  DELETE_DeletePostCommentByPostHashId:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/DeletePostCommentByPostHashId',
 };

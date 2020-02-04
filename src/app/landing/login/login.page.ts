@@ -53,6 +53,10 @@ export class LoginPage implements OnInit, OnDestroy {
         if (result && result.token) {
           this.localStorageService.store('token', result.token);
           this.localStorageService.store('currentUserName', result.username);
+          this.localStorageService.store(
+            'userAvatarLink',
+            result.userAvatarLink
+          );
           // this.router.navigateByUrl('/tabs');
           this.navController.navigateRoot(['/tabs']);
         } else {

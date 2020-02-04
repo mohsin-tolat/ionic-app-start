@@ -7,4 +7,15 @@ export class CommentDto {
   public postDetails: PostDto;
   public commentedOn: string;
   public content: string;
+  public totalCommentLikes: number;
+  public isCurrentUserLikeComment: boolean;
+  public isCurrentUserComment: boolean;
+}
+
+export class UpdateCommentModel {
+  public commentHashId: string;
+  public commentedOn: string;
+  public content: string;
+  public commentedByUserHashId: string;
+  public postHashId: string;
 }

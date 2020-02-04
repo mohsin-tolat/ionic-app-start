@@ -2,7 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ActivityDto } from 'src/shared/models/activityDto.model';
-import { CommentDto } from 'src/shared/models/commentDto.model';
+import {
+  CommentDto,
+  UpdateCommentModel,
+} from 'src/shared/models/commentDto.model';
 import { UrlConfig } from './../../shared/appConfig';
 import { PagedResult } from './../../shared/models/pagedResult';
 import { PostDto, UploadPostDto } from './../../shared/models/postDto';
@@ -78,11 +81,26 @@ export class PostService {
     pageSize: number
   ): Observable<PagedResult<CommentDto>> {
     const url =
-      UrlConfig.GET_CurrentUserPostsActivities +
-      '?pageNo=' +
+      UrlConfig.GET_PostCommentsByPostHashId +
+      '?postHashId=' +
+      postHashId +
+      '&pageNo=' +
       pageNo +
       '&pageSize=' +
       pageSize;
     return this.httpClient.get<PagedResult<CommentDto>>(url, this.httpOptions);
+  }
+
+  public AddComment(comment: UpdateCommentModel): Observable<boolean> {
+    const url = UrlConfig.POST_AddNewCommentForPost;
+    return this.httpClient.post<boolean>(url, comment, this.httpOptions);
+  }
+
+  public DeletePostComment(commentHashId: string): Observable<boolean> {
+    const url =
+      UrlConfig.DELETE_DeletePostCommentByPostHashId +
+      '?commentHashId=' +
+      commentHashId;
+    return this.httpClient.delete<boolean>(url, this.httpOptions);
   }
 }

@@ -1,5 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { ToastService } from 'src/app/services/toast.service';
 import { PostDto } from './../../../shared/models/postDto';
@@ -18,7 +19,8 @@ export class PhotoCardComponent implements OnInit {
     private postService: PostService,
     private toastService: ToastService,
     private alertController: AlertController,
-    private location: Location
+    private location: Location,
+    private router: Router
   ) {}
 
   onLikeButtonClick(postHashId: string) {
@@ -32,6 +34,12 @@ export class PhotoCardComponent implements OnInit {
         console.error('Error Occurred in onLikeButtonClick');
       }
     );
+  }
+
+  onCommentButtonClick(postHashId: string) {
+    this.router.navigate(['tabs', 'postComments'], {
+      queryParams: { postHashId },
+    });
   }
 
   onDeleteButtonClick() {

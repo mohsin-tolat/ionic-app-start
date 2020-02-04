@@ -8,4 +8,5 @@ export class LoggedInUserModel {
   token: string;
   message: string;
   userHashId: string;
+  userAvatarLink: string;
 }
