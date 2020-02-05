@@ -1,12 +1,13 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IonContent, MenuController } from '@ionic/angular';
+import { LocalStorageService } from 'ngx-webstorage';
 import { Subscription } from 'rxjs';
+import { NetworkService } from 'src/app/services/network.service';
 import { TabsService } from 'src/app/services/tabs.service';
 import { AppConfig } from 'src/shared/appConfig';
 import { PagedResult } from './../../../shared/models/pagedResult';
 import { PostDto } from './../../../shared/models/postDto';
 import { PostService } from './../../services/post.service';
-import { LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-tab1',
@@ -18,7 +19,8 @@ export class Tab1Page implements OnInit, OnDestroy {
     private postService: PostService,
     private menuController: MenuController,
     private tabsService: TabsService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
+    private networkService: NetworkService
   ) {}
 
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -30,6 +32,8 @@ export class Tab1Page implements OnInit, OnDestroy {
   isFromScrollToTop = false;
   // isNewUser = false;
   currentUserName = '';
+  networkCheckSunscription: Subscription;
+  isNetworkConnected: boolean;
 
   ngOnInit(): void {
     this.currentPage = 1;
@@ -38,6 +42,14 @@ export class Tab1Page implements OnInit, OnDestroy {
       this.currentPage,
       AppConfig.Setting.POST_PAGE_SIZE_FOR_DASHBOARD
     );
+  }
+
+  subscribeToNetworkCheck() {
+    this.networkCheckSunscription = this.networkService
+      .getNetworkStatus()
+      .subscribe(isConnected => {
+        this.isNetworkConnected = isConnected;
+      });
   }
 
   doRefresh(event: any) {
@@ -57,6 +69,7 @@ export class Tab1Page implements OnInit, OnDestroy {
     this.menuController.enable(false, 'first');
     this.handleLogout();
     this.handleScrollToTopWhenDoubleTab();
+    this.subscribeToNetworkCheck();
   }
 
   private handleScrollToTopWhenDoubleTab() {
@@ -72,6 +85,7 @@ export class Tab1Page implements OnInit, OnDestroy {
 
   ionViewDidLeave() {
     this.isFromScrollToTop = false;
+    this.networkCheckSunscription.unsubscribe();
     this.tabDataSubscription.forEach(element => {
       element.unsubscribe();
     });
