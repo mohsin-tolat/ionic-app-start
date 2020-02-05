@@ -52,17 +52,13 @@
           {{comment.content}}
         </p>
         <p>
-          {{comment.commentedOn | amLocal | amTimeAgo:true}}
-          <ng-template *ngIf="comment.totalCommentLikes>0">
-            {{comment.totalCommentLikes}} Likes</ng-template
+          {{comment.commentedOn | amFromUtc | amLocal | amTimeAgo:true}}
+          <ng-container *ngIf="comment.totalCommentLikes==1">
+            {{comment.totalCommentLikes}} Like</ng-container
           >
-          <!-- <ion-button
-            *ngIf="comment.isCurrentUserComment"
-            (click)="this.deleteComment(comment.commentHashId)"
-            fill="clear"
+          <ng-container *ngIf="comment.totalCommentLikes>1">
+            {{comment.totalCommentLikes}} Likes</ng-container
           >
-            Delete
-          </ion-button> -->
           <a
             *ngIf="comment.isCurrentUserComment"
             (click)="this.presentDeleteConfirm(comment.commentHashId)"
@@ -72,18 +68,18 @@
           </a>
         </p>
       </ion-label>
-      <ion-button
-        size="small"
-        fill="clear"
-        color="dark"
+
+      <a
         *ngIf="!this.comment.isCurrentUserLikeComment"
+        (click)="this.onLikeButtonClick(comment.commentHashId, comment.commentIdentifier)"
+        class="user-clickable-link"
       >
         <ion-icon slot="end" slot="icon-only" name="heart-empty"></ion-icon>
-      </ion-button>
-      <ion-button
-        size="small"
-        fill="clear"
+      </a>
+      <a
         *ngIf="this.comment.isCurrentUserLikeComment"
+        (click)="this.onLikeButtonClick(comment.commentHashId, comment.commentIdentifier)"
+        class="user-clickable-link"
       >
         <ion-icon
           slot="end"
@@ -91,7 +87,7 @@
           name="heart"
           color="danger"
         ></ion-icon>
-      </ion-button>
+      </a>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">

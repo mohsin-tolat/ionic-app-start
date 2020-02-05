@@ -103,4 +103,17 @@ export class PostService {
       commentHashId;
     return this.httpClient.delete<boolean>(url, this.httpOptions);
   }
+
+  public LikeComment(
+    commentHashId: string,
+    commentIdentifier: string
+  ): Observable<CommentDto> {
+    const url =
+      UrlConfig.POST_LikeDislikeComment +
+      '/' +
+      commentHashId +
+      '/' +
+      commentIdentifier;
+    return this.httpClient.post<CommentDto>(url, this.httpOptions);
+  }
 }

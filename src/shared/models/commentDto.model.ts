@@ -10,6 +10,7 @@ export class CommentDto {
   public totalCommentLikes: number;
   public isCurrentUserLikeComment: boolean;
   public isCurrentUserComment: boolean;
+  public commentIdentifier: string;
 }
 
 export class UpdateCommentModel {

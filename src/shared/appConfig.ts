@@ -43,4 +43,6 @@ export const UrlConfig = {
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/AddNewCommentForPost',
   DELETE_DeletePostCommentByPostHashId:
     AppConfig.API_ENDPOINT_PREFIX + 'api/Post/DeletePostCommentByPostHashId',
+  POST_LikeDislikeComment:
+    AppConfig.API_ENDPOINT_PREFIX + 'api/Post/LikeDislikeComment',
 };

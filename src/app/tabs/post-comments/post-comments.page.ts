@@ -182,6 +182,22 @@ export class PostCommentsPage implements OnInit {
     await alert.present();
   }
 
+  onLikeButtonClick(commentHashId: string, commentIdentifier: string) {
+    this.postService.LikeComment(commentHashId, commentIdentifier).subscribe(
+      response => {
+        const foundComment = this.allComments.find(x => {
+          return x.commentIdentifier === response.commentIdentifier;
+        });
+
+        const foundCommentIndex = this.allComments.indexOf(foundComment);
+        this.allComments[foundCommentIndex] = response;
+      },
+      error => {
+        console.error('Error Occurred while Like/Dislike comments', error);
+      }
+    );
+  }
+
   goBack() {
     this.location.back();
   }

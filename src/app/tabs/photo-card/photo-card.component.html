@@ -73,6 +73,6 @@
     </ion-note>
   </ion-item>
   <ion-item *ngIf="post.uploadOn" lines="none">
-    <ion-note>{{ post.uploadOn | amLocal | amTimeAgo }}</ion-note>
+    <ion-note>{{ post.uploadOn | amFromUtc | amLocal | amTimeAgo }}</ion-note>
   </ion-item>
 </ion-card>
