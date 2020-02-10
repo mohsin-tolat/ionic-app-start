@@ -6,3 +6,17 @@ Cordova reference documentation:
 
 - Icons: https://cordova.apache.org/docs/en/latest/config_ref/images.html
 - Splash Screens: https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-splashscreen/
+
+
+
+### Serve Application
+
+ionic serve
+
+##### Ionic Cordova Run (Browser)
+
+ionic cordova run browser
+
+##### Ionic Cordova Emulation in Android
+
+ionic cordova emulate android
