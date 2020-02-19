@@ -32,8 +32,8 @@ export class Tab1Page implements OnInit, OnDestroy {
   isFromScrollToTop = false;
   // isNewUser = false;
   currentUserName = '';
-  networkCheckSunscription: Subscription;
-  isNetworkConnected: boolean;
+  // networkCheckSunscription: Subscription;
+  // isNetworkConnected: boolean;
 
   ngOnInit(): void {
     this.currentPage = 1;
@@ -44,13 +44,13 @@ export class Tab1Page implements OnInit, OnDestroy {
     );
   }
 
-  subscribeToNetworkCheck() {
-    this.networkCheckSunscription = this.networkService
-      .getNetworkStatus()
-      .subscribe(isConnected => {
-        this.isNetworkConnected = isConnected;
-      });
-  }
+  // subscribeToNetworkCheck() {
+  //   this.networkCheckSunscription = this.networkService
+  //     .getNetworkStatus()
+  //     .subscribe(isConnected => {
+  //       this.isNetworkConnected = isConnected;
+  //     });
+  // }
 
   doRefresh(event: any) {
     this.currentPage = 1;
@@ -69,7 +69,7 @@ export class Tab1Page implements OnInit, OnDestroy {
     this.menuController.enable(false, 'first');
     this.handleLogout();
     this.handleScrollToTopWhenDoubleTab();
-    this.subscribeToNetworkCheck();
+    // this.subscribeToNetworkCheck();
   }
 
   private handleScrollToTopWhenDoubleTab() {
@@ -85,7 +85,7 @@ export class Tab1Page implements OnInit, OnDestroy {
 
   ionViewDidLeave() {
     this.isFromScrollToTop = false;
-    this.networkCheckSunscription.unsubscribe();
+    // this.networkCheckSunscription.unsubscribe();
     this.tabDataSubscription.forEach(element => {
       element.unsubscribe();
     });

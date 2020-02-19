@@ -8,16 +8,16 @@
     <ion-title class="title">Instant-Gram</ion-title>
     <ion-buttons slot="primary">
       <ion-button>
-        <ion-icon slot="icon-only" name="more"></ion-icon>
+        <ion-icon slot="icon-only" name="chatbubbles"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-item *ngIf="!isNetworkConnected">
+  <!-- <ion-item *ngIf="!isNetworkConnected">
     Please Connect to Internet
-  </ion-item>
+  </ion-item> -->
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
