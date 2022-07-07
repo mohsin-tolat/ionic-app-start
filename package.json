@@ -34,7 +34,7 @@
     "cordova-plugin-network-information": "^2.0.2",
     "cordova-sqlite-storage": "^4.0.0",
     "core-js": "^2.5.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-moment": "^3.5.0",
     "ngx-timeago": "^1.0.3",
     "ngx-webstorage": "^4.0.1",
